@@ -70,6 +70,12 @@ public class ProductoService {
 
         ProductoModel guardado = productoRepository.save(producto);
 
+        try {
+            actualizarPrecioDesdeSteam(guardado.getId());
+        } catch (Exception e) {
+            System.out.println("No se pudo actualizar precio desde Steam al crear producto: " + e.getMessage());
+        }
+
         ProductoModel recargado = productoRepository.findByIdFull(guardado.getId())
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + guardado.getId()));
 
@@ -90,7 +96,7 @@ public class ProductoService {
         ProductoModel recargado = productoRepository.findByIdFull(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
 
-        actualizarEmbeddingProducto(recargado);
+        // actualizarEmbeddingProducto(recargado);
 
         return ProductoMapper.toResponseDTO(recargado);
     }
@@ -160,7 +166,7 @@ public class ProductoService {
         ProductoModel recargado = productoRepository.findByIdFull(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
 
-        actualizarEmbeddingProducto(recargado);
+        // actualizarEmbeddingProducto(recargado);
 
         return ProductoMapper.toResponseDTO(recargado);
     }
@@ -284,8 +290,8 @@ public class ProductoService {
     private void applyRequestToModel(ProductoRequestDTO dto, ProductoModel producto) {
         producto.setNombre(dto.getNombre());
         producto.setPrecio(dto.getPrecio());
-        producto.setSinopsis(dto.getSinopsis()); // Nuevo campo agregado
-        producto.setUrlTrailer(dto.getUrlTrailer()); // Nuevo campo agregado
+        producto.setSinopsis(dto.getSinopsis());
+        producto.setUrlTrailer(dto.getUrlTrailer());
         producto.setSaga(dto.getSaga());
         producto.setPortadaSaga(dto.getPortadaSaga());
 
@@ -637,11 +643,15 @@ public class ProductoService {
 
     public PagedResponse<ProductoResponseDTO> findAllPaged(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id").descending());
-        Page<ProductoModel> result = productoRepository.findAll(pageable);
+        Page<ProductoModel> result = productoRepository.findAllFullPaged(pageable);
 
+        // Carga cada producto con sus relaciones por separado
         List<ProductoResponseDTO> contenido = result.getContent()
                 .stream()
-                .map(ProductoMapper::toResponseDTO)
+                .map(p -> productoRepository.findByIdFull(p.getId())
+                        .map(ProductoMapper::toResponseDTO)
+                        .orElse(null))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
         return new PagedResponse<>(contenido, page, result.getTotalPages(), result.getTotalElements());
@@ -661,7 +671,7 @@ public class ProductoService {
 
         Map<String, Object> datosSteam = scrapingClientService.obtenerPrecioSteam(linkSteam.getAppId());
 
-        Double precio = Double.valueOf(datosSteam.get("precio").toString());
+        Double precio = Double.valueOf(datosSteam.get("precio").toString()) / 100;
 
         producto.setPrecio(precio);
 
@@ -683,7 +693,7 @@ public class ProductoService {
     }
 
     public List<Long> obtenerIdsProductosConAppId() {
-        return productoRepository.findAllFull()
+        return productoRepository.findAll()
                 .stream()
                 .filter(p -> p.getLinksCompra() != null &&
                         p.getLinksCompra().stream().anyMatch(l ->

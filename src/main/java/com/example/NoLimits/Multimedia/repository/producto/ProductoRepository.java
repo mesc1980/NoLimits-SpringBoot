@@ -1,5 +1,7 @@
 package com.example.NoLimits.Multimedia.repository.producto;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -41,6 +43,7 @@ public interface ProductoRepository extends JpaRepository<ProductoModel, Long> {
     """)
     Optional<ProductoModel> findByIdWithImagenes(@Param("id") Long id);
 
+    // ⚠️ SOLO usar para contextos muy acotados (admin, exportación), nunca en endpoints públicos
     @Query("""
         select distinct p from ProductoModel p
         left join fetch p.imagenes
@@ -55,9 +58,19 @@ public interface ProductoRepository extends JpaRepository<ProductoModel, Long> {
         left join fetch p.linksCompra lc
         left join fetch lc.plataforma
     """)
-     List<ProductoModel> findAllFull();
+    List<ProductoModel> findAllFull();
 
-     @Query("""
+    // ✅ Versión paginada de findAllFull — úsala siempre en el frontend
+    // Nota: JPQL con fetch + Pageable no puede calcular el count con los joins,
+    // por eso se separa countQuery en una consulta simple.
+    // Reemplaza findAllFullPaged por una query simple sin JOINs
+    @Query(
+        value = "select p from ProductoModel p",
+        countQuery = "select count(p) from ProductoModel p"
+    )
+    Page<ProductoModel> findAllFullPaged(Pageable pageable);
+
+    @Query("""
         select distinct p from ProductoModel p
         left join fetch p.imagenes
         left join fetch p.plataformas pp
