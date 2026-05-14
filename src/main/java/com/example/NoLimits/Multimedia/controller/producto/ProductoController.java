@@ -52,17 +52,20 @@ public class ProductoController {
      * Para ver el detalle completo de un producto, usar GET /productos/{id}
      */
     @GetMapping
-    @Operation(
-        summary = "Listar todos los productos (resumen liviano).",
-        description = "Devuelve id, nombre, precio, tipo, estado, saga y portada. Sin relaciones N:M. Usar /productos/{id} para el detalle completo."
-    )
-    public ResponseEntity<List<ProductoResumenDTO>> listarProductos() {
-        List<ProductoResumenDTO> productos = productoService.findAll();
-        if (productos.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(productos);
+@Operation(
+    summary = "Listar todos los productos (resumen liviano).",
+    description = "Devuelve id, nombre, precio, tipo, estado, saga y portada. Sin relaciones N:M. Usar /productos/{id} para el detalle completo."
+)
+public ResponseEntity<List<ProductoResumenDTO>> listarProductos() {
+
+    List<ProductoResumenDTO> productos = productoService.findAll();
+
+    if (productos.isEmpty()) {
+        return ResponseEntity.noContent().build();
     }
+
+    return ResponseEntity.ok(productos);
+}
 
     /**
      * GET /api/v1/productos/paginacion?page=1&size=20
@@ -73,6 +76,7 @@ public class ProductoController {
      *
      * size recomendado: 12 a 24 productos por página.
      */
+
     @GetMapping("/paginacion")
     @Operation(
         summary = "Listar productos paginados (resumen liviano).",
@@ -84,7 +88,9 @@ public class ProductoController {
     ) {
         if (page < 1) page = 1;
         if (size < 1 || size > 50) size = 20; // máximo 50 por página
-        PagedResponse<ProductoResumenDTO> response = productoService.findAllPaged(page, size);
+
+        PagedResponse<ProductoResumenDTO> response = 
+            productoService.findAllPaged(page, size);
         return ResponseEntity.ok(response);
     }
 
@@ -298,5 +304,16 @@ public class ProductoController {
         List<Map<String, Object>> resumen = productoService.obtenerProductosConDatos();
         if (resumen.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok(resumen);
+    }
+
+    // ========================= Scraping =========================
+    @GetMapping("/existe-link")
+    @Operation(
+        summary = "Verificar si existe un producto por link de compra.",
+        description = "Usado por el scraper para evitar duplicados antes de crear productos."
+    )
+    public ResponseEntity<Boolean> existeProductoPorLink(@RequestParam String url) {
+        boolean existe = productoService.existeProductoPorLinkCompra(url);
+        return ResponseEntity.ok(existe);
     }
 }
