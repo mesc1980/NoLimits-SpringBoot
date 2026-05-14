@@ -124,6 +124,7 @@ public class ProductoService {
         // Nuevos campos agregados Sinopsis y URL del trailer
         if (dto.getSinopsis() != null) productoExistente.setSinopsis(dto.getSinopsis());
         if (dto.getUrlTrailer() != null) productoExistente.setUrlTrailer(dto.getUrlTrailer());
+        if (dto.getAnio() != null) productoExistente.setAnio(dto.getAnio());
         if (dto.getSaga() != null) productoExistente.setSaga(dto.getSaga());
         if (dto.getPortadaSaga() != null) productoExistente.setPortadaSaga(dto.getPortadaSaga());
 
@@ -341,6 +342,7 @@ public class ProductoService {
         producto.setPrecio(dto.getPrecio());
         producto.setSinopsis(dto.getSinopsis());
         producto.setUrlTrailer(dto.getUrlTrailer());
+        producto.setAnio(dto.getAnio());
         producto.setSaga(dto.getSaga());
         producto.setPortadaSaga(dto.getPortadaSaga());
 
