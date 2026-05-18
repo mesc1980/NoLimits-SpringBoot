@@ -49,4 +49,10 @@ public class ExternalContentIndexerController {
         int total = indexerService.indexarAnimeJikan();
         return "Animes Jikan indexados: " + total;
     }
+
+    @PostMapping("/indexar-libros")
+    public String indexarLibros() {
+        int total = indexerService.indexarLibrosOpenLibrary();
+        return "Libros OpenLibrary indexados: " + total;
+    }
 }

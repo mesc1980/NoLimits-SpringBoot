@@ -243,6 +243,49 @@ public class ExternalContentIndexerService {
         return contador;
     }
 
+    @SuppressWarnings("unchecked")
+    public int indexarLibrosOpenLibrary() {
+        int contador = 0;
+        String[] temas = {"fantasy", "science_fiction", "romance", "thriller", "horror", "adventure", "mystery"};
+        try {
+            for (String tema : temas) {
+                String url = "https://openlibrary.org/subjects/" + tema + ".json?limit=20";
+                ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+                if (response.getBody() == null) continue;
+                List<Map<String, Object>> works = (List<Map<String, Object>>) response.getBody().get("works");
+                if (works == null) continue;
+                for (Map<String, Object> book : works) {
+                    try {
+                        String titulo = (String) book.getOrDefault("title", "Sin título");
+                        List<Map<String, Object>> authorsList = (List<Map<String, Object>>) book.getOrDefault("authors", List.of());
+                        String autores = authorsList.stream()
+                                .map(a -> (String) a.getOrDefault("name", ""))
+                                .filter(s -> !s.isEmpty())
+                                .reduce((a, b) -> a + ", " + b)
+                                .orElse("");
+                        Object año = book.getOrDefault("first_publish_year", "");
+                        String contenido = """
+                                Nombre: %s
+                                Tipo: Libro
+                                Autor: %s
+                                Año: %s
+                                Género: %s
+                                Fuente: OPENLIBRARY
+                                """.formatted(titulo, autores, año, tema);
+                        guardarEmbeddingExterno(titulo, contenido, "OPENLIBRARY");
+                        contador++;
+                    } catch (Exception e) {
+                        log.warn("Error indexando libro OpenLibrary: {}", e.getMessage());
+                    }
+                }
+                Thread.sleep(500);
+            }
+        } catch (Exception e) {
+            log.error("Error al indexar libros OpenLibrary: {}", e.getMessage());
+        }
+        return contador;
+    }
+
     private void guardarEmbeddingExterno(String titulo, String contenido, String fuente) {
         List<Float> embedding = embeddingService.generarEmbedding(contenido);
         String vector = embedding.toString();
@@ -260,13 +303,15 @@ public class ExternalContentIndexerService {
         int juegosRawg = indexarJuegosRAWG();
         int juegosIgdb = indexarJuegosIGDB();
         int anime = indexarAnimeJikan();
+        int libros = indexarLibrosOpenLibrary();
         return Map.of(
                 "peliculas_tmdb", peliculas,
                 "series_tmdb", series,
                 "juegos_rawg", juegosRawg,
                 "juegos_igdb", juegosIgdb,
                 "anime_jikan", anime,
-                "total", peliculas + series + juegosRawg + juegosIgdb + anime
+                "libros_openlibrary", libros,
+                "total", peliculas + series + juegosRawg + juegosIgdb + anime + libros
         );
     }
 }
