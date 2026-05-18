@@ -153,7 +153,7 @@ public class OpenAIChatClient {
                 """.formatted(estiloDinamico);
 
         ResponseCreateParams params = ResponseCreateParams.builder()
-                .model(ChatModel.GPT_5_2)
+                .model(ChatModel.GPT_4O_MINI)
                 .input("""
                         %s
 
