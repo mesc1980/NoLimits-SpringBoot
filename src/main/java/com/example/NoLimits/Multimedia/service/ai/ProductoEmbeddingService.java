@@ -42,7 +42,7 @@ public class ProductoEmbeddingService {
         String sql = """
                 SELECT contenido
                 FROM producto_embeddings
-                WHERE (embedding <=> ?::vector) < 0.8
+                WHERE (embedding <=> ?::vector) < 0.95
                 ORDER BY embedding <=> ?::vector
                 LIMIT 3
                 """;
