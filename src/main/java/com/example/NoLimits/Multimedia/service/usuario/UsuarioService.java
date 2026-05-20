@@ -76,13 +76,10 @@ public class UsuarioService {
     @Autowired
     private FavoritoRepository favoritoRepository;
 
-
-    @Autowired
-    private ProductoRepository productoRepository;
-
-   UsuarioService(AdminInitializer adminInitializer) {
-    this.adminInitializer = adminInitialize;
-     
+    UsuarioService(AdminInitializer adminInitializer) {
+        this.adminInitializer = adminInitializer;
+    }
+    
     /* ================= CRUD BÁSICO ================= */
 
     // Obtener todos los usuarios
