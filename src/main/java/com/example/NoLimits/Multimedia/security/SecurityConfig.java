@@ -47,6 +47,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/embeddings/**").permitAll()
                 .requestMatchers("/api/scraping/**").permitAll()
                 .requestMatchers("/api/igdb/**").permitAll()
+                .requestMatchers("/api/tmdb/**").permitAll()
+                .requestMatchers("/api/rawg/**").permitAll()
                 .requestMatchers(
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
