@@ -24,9 +24,15 @@ public class RawgProxyController {
         String queryString = request.getQueryString();
 
         String url = RAWG_BASE + path + "?key=" + rawgKey
-                   + (queryString != null ? "&" + queryString : "");
+                + (queryString != null ? "&" + queryString : "");
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        return ResponseEntity.ok(response.getBody());
+        
+        String body = response.getBody();
+        if (body != null) {
+            body = body.replaceAll("\"next\":\"[^\"]*key=[^\"]*\"", "\"next\":null");
+        }
+        
+        return ResponseEntity.ok(body);
     }
 }

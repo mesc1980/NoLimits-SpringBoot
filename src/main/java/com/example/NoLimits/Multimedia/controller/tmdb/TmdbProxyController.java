@@ -20,16 +20,20 @@ public class TmdbProxyController {
 
     @GetMapping("/**")
     public ResponseEntity<String> proxy(HttpServletRequest request) {
-        // Extrae todo lo que viene después de /api/tmdb
         String path = request.getRequestURI().replace("/api/tmdb", "");
         String queryString = request.getQueryString();
 
-        // Arma la URL hacia TMDB agregando la key internamente
         String url = TMDB_BASE + path + "?api_key=" + tmdbToken
-                   + "&language=es-ES"
-                   + (queryString != null ? "&" + queryString : "");
+                + "&language=es-ES"
+                + (queryString != null ? "&" + queryString : "");
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        return ResponseEntity.ok(response.getBody());
+
+        String body = response.getBody();
+        if (body != null) {
+            body = body.replaceAll("\"next\":\"[^\"]*api_key=[^\"]*\"", "\"next\":null");
+        }
+
+        return ResponseEntity.ok(body);
     }
 }
