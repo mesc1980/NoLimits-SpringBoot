@@ -34,7 +34,9 @@ import com.example.NoLimits.Multimedia.repository.venta.VentaRepository;
 import com.example.NoLimits.Multimedia.repository.usuario.FavoritoRepository;
 import com.example.NoLimits.Multimedia.repository.usuario.RolRepository;
 import com.example.NoLimits.Multimedia.dto.usuario.request.FavoritoRequestDTO;
+import com.example.NoLimits.Multimedia.model.producto.ProductoModel;
 
+import com.example.NoLimits.Multimedia.repository.producto.ProductoRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.transaction.Transactional;
@@ -81,8 +83,8 @@ public class UsuarioService {
     private ProductoRepository productoRepository;
 
    UsuarioService(AdminInitializer adminInitializer) {
-    this.adminInitializer = adminInitialize;
-     
+    this.adminInitializer = adminInitializer;
+   }
     /* ================= CRUD BÁSICO ================= */
 
     // Obtener todos los usuarios
