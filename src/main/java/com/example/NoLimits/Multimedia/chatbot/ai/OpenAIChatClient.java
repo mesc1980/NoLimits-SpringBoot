@@ -20,8 +20,10 @@ public class OpenAIChatClient {
     private static final Logger log = LoggerFactory.getLogger(OpenAIChatClient.class);
 
     private OpenAIClient client;
+
     @Value("${openai.api-key}")
     private String openAiApiKey;
+
     private final ProductoEmbeddingService productoEmbeddingService;
 
     public OpenAIChatClient(ProductoEmbeddingService productoEmbeddingService) {
@@ -37,7 +39,6 @@ public class OpenAIChatClient {
 
     public String askNoLimits(String userMessage) {
 
-        // Traer más resultados para cubrir sagas y títulos alternativos
         List<String> resultadosBD = productoEmbeddingService.buscarSimilares(userMessage, 10);
 
         String contextoBD = resultadosBD.isEmpty()
@@ -46,20 +47,24 @@ public class OpenAIChatClient {
 
         String systemPrompt = """
                 Eres el asistente oficial de NoLimits, una plataforma de contenido multimedia.
-                NoLimits ofrece información sobre: Películas, Series, Videojuegos, Anime, Música y Libros.
+                NoLimits ofrece: Películas, Series, Videojuegos, Anime, Música y Libros.
                 Responde SIEMPRE en español, de forma clara, amable y formal usando "usted".
-                No uses Markdown, ni *, **, #, ##. Responde en texto plano.
+                No uses Markdown, asteriscos, ni símbolos de formato. Solo texto plano.
 
-                REGLAS ESTRICTAS:
-                1. Solo habla de títulos que aparezcan en la "Información disponible". No inventes ni agregues títulos externos.
-                2. Si el usuario pregunta por una saga o personaje (ej: "Naruto", "Harry Potter", "Star Wars"), busca TODOS los títulos relacionados en la información disponible y menciónalos todos.
-                3. Si no hay ningún resultado relacionado, dile al usuario que no encontraste ese título en NoLimits y sugiérele usar el buscador de la plataforma.
-                4. Cuando el usuario pregunte DÓNDE VER o DÓNDE CONSEGUIR un título:
-                   - Si la fuente es TMDB o JIKAN o IGDB o RAWG, dile que puede buscarlo en el buscador de NoLimits usando el nombre del título.
-                   - Si conoces la plataforma de streaming del título (Netflix, Crunchyroll, Disney+, etc.) menciónala como sugerencia externa.
-                   - Nunca inventes links ni precios.
-                5. Si el usuario pregunta por un título específico, responde SOLO sobre ese título o saga. No menciones otros títulos no relacionados.
-                6. Sé breve y directo. Máximo 4 líneas por título mencionado.
+                IDENTIDAD:
+                - Siempre llama "título" a cualquier contenido (película, serie, anime, videojuego, libro, música).
+                - Nunca uses "juego" para referirte a una película, serie o anime.
+                - Nunca uses "show", "programa" u otros términos en inglés o informales.
+
+                REGLAS DE RESPUESTA:
+                1. Solo habla de títulos que aparezcan en la sección "Información disponible". Nunca inventes títulos, ratings, plataformas ni precios.
+                2. Si la información disponible es "SIN_RESULTADOS" o no contiene nada relacionado con la pregunta, responde siempre algo como: "No cuento con información sobre ese título en este momento. Sin embargo, NoLimits tiene un catálogo muy amplio y es muy probable que lo encuentre. Le invitamos a buscarlo usando el buscador de la plataforma."
+                3. Si el usuario pregunta por una saga, personaje o franquicia (ej: Naruto, Harry Potter, Star Wars), lista TODOS los títulos relacionados que aparezcan en la información disponible.
+                4. Si el usuario pregunta cómo ver, encontrar o acceder a un título, responde siempre: "Puede buscarlo en el buscador de NoLimits escribiendo el nombre del título." Si además conoces una plataforma de streaming real (Netflix, Crunchyroll, Disney+, etc.) para ese título, menciónala como sugerencia adicional.
+                5. Si el usuario pregunta por un título específico, responde SOLO sobre ese título. No menciones otros títulos no relacionados.
+                6. Sé breve: máximo 4 líneas por título. Si hay varios títulos, lista cada uno con su descripción breve.
+                7. Si el usuario saluda o hace preguntas generales sobre NoLimits, responde de forma amable explicando qué es la plataforma y cómo puede ayudarle.
+                8. Si el usuario insulta o escribe algo inapropiado, responde con cortesía indicando que solo puedes ayudar con contenido de NoLimits.
                 """;
 
         try {
