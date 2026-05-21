@@ -19,7 +19,7 @@ public class ChatbotServiceImpl implements ChatbotService {
     @Override
     public ChatResponse getWelcomeMessage() {
         return new ChatResponse(
-                "¡Hola! 👋 Soy el asistente de NoLimits. Puedo orientarle dentro de la plataforma. ¿Busca algo en específico?",
+                "¡Oye! 👊 Soy el asistente de NoLimits. ¡No me subestimes, sé de todo lo que hay aquí! ¿Qué andas buscando?",
                 List.of(
                         "¿Qué es NoLimits?",
                         "¿Cómo crear una cuenta?",
@@ -73,22 +73,18 @@ public class ChatbotServiceImpl implements ChatbotService {
         // Favoritos / guardar / biblioteca
         if (containsAny(text, "favorito", "favoritos", "mis favoritos", "guardar", "mi lista", "biblioteca", "mi biblioteca")) {
             return new ChatResponse(
-                    "Para guardar un título, ingrese a su página y haga clic en el botón 'Guardar en mi lista' o en la estrella ☆ de la portada. Lo encontrará luego en 'Mi biblioteca' en el menú superior.",
+                    "¡Ve a la página del título, dale al botón 'Guardar en mi lista' o a la estrella ☆ de la portada, y ya queda en tu 'Mi biblioteca'!",
                     List.of("¿Cómo iniciar sesión?", "¿Cómo ver un título?"),
-                    "/principal",
-                    false,
-                    "rule"
+                    "/principal", false, "rule"
             );
         }
 
         // Olvidé mi contraseña
         if (containsAny(text, "olvide mi contrasena", "olvide contrasena", "recuperar contrasena", "contrasena olvidada", "forgot password")) {
             return new ChatResponse(
-                    "Si olvidó su contraseña, en la pantalla de 'Login' encontrará la opción '¿Olvidaste tu contraseña?' para recuperarla mediante su correo electrónico.",
+                    "¡No te rajes! En la pantalla de 'Login' hay una opción para recuperar tu contraseña por correo. ¡Úsala!",
                     List.of("¿Cómo iniciar sesión?", "¿Cómo crear una cuenta?"),
-                    "/principal",
-                    false,
-                    "rule"
+                    "/principal", false, "rule"
             );
         }
 
@@ -114,13 +110,12 @@ public class ChatbotServiceImpl implements ChatbotService {
             );
         }
 
+        // Reseñas
         if (containsAny(text, "resena", "resenas", "opinion", "comentario", "como comento", "como dejo una resena", "guardar resena")) {
             return new ChatResponse(
-                    "Para dejar una reseña, ingrese a la página del título que desea comentar. Encontrará la sección 'Mi reseña personal' donde puede escribir su opinión y hacer clic en 'Guardar reseña'. También puede responder a las reseñas de otros usuarios con el botón 'Responder', y dar like 👍 o dislike 👎 a las reseñas existentes.",
+                    "¡Entra al título, baja hasta 'Mi reseña personal', escribe tu opinión y dale a 'Guardar reseña'! También puedes responder reseñas de otros con 'Responder' y darles like 👍 o dislike 👎.",
                     List.of("¿Cómo guardar en Mi biblioteca?", "¿Cómo iniciar sesión?"),
-                    "/principal",
-                    false,
-                    "rule"
+                    "/principal", false, "rule"
             );
         }
         
