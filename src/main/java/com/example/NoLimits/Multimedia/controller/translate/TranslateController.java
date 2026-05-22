@@ -1,7 +1,7 @@
 package com.example.NoLimits.Multimedia.controller.translate;
 
-import com.example.NoLimits.Multimedia.dto.translate.TranslateRequest;
-import com.example.NoLimits.Multimedia.dto.translate.TranslateResponse;
+import com.example.NoLimits.Multimedia.dto.translate.response.TranslateResponse;
+import com.example.NoLimits.Multimedia.dto.translate.request.TranslateRequest;
 import com.example.NoLimits.Multimedia.service.translate.TranslateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
