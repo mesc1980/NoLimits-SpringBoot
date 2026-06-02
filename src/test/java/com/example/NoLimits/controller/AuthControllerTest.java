@@ -7,6 +7,7 @@ import com.example.NoLimits.Multimedia.repository.usuario.UsuarioRepository;
 import com.example.NoLimits.Multimedia.security.JwtUtil;
 import com.example.NoLimits.config.AbstractContainerBaseTest;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,18 +26,6 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * AuthControllerTest — Pruebas funcionales y validación de API
- *
- * Cubre los tres endpoints de /api/v1/auth:
- *   - POST /login
- *   - POST /reset-password
- *   - POST /google/sync
- *   - POST /logout
- *
- * Tipo: Funcional (se prueba el controlador completo con MockMvc,
- * mockeando sólo la capa de persistencia y seguridad).
- */
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -76,6 +65,22 @@ public class AuthControllerTest extends AbstractContainerBaseTest {
         return u;
     }
 
+    private UsuarioModel usuarioEduardo() {
+        RolModel rol = new RolModel();
+        rol.setId(1L);
+        rol.setNombre("ROLE_USER");
+        rol.setActivo(true);
+
+        UsuarioModel u = new UsuarioModel();
+        u.setId(10L);
+        u.setNombre("Eduardo");
+        u.setApellidos("Hernandez");
+        u.setCorreo("eduardo@test.com");
+        u.setPassword("password-encriptada");
+        u.setRol(rol);
+        return u;
+    }
+
     // ===================== POST /login =====================
 
     @Test
@@ -95,6 +100,29 @@ public class AuthControllerTest extends AbstractContainerBaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").value("jwt-token-mock"))
                 .andExpect(jsonPath("$.correo").value("juan@test.com"))
+                .andExpect(jsonPath("$.rolNombre").value("ROLE_USER"));
+    }
+
+    @Test
+    @DisplayName("Login con credenciales de Eduardo retorna 200 con token")
+    void login_eduardo_credencialesValidas_retorna200() throws Exception {
+        UsuarioModel usuario = usuarioEduardo();
+
+        when(usuarioRepository.findByCorreoIgnoreCase("eduardo@test.com"))
+                .thenReturn(Optional.of(usuario));
+        when(passwordEncoder.matches("123456", usuario.getPassword()))
+                .thenReturn(true);
+        when(jwtUtil.generateToken("eduardo@test.com", "ROLE_USER"))
+                .thenReturn("jwt-token-test");
+
+        mockMvc.perform(post("/api/v1/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"correo\":\"eduardo@test.com\",\"password\":\"123456\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.token").value("jwt-token-test"))
+                .andExpect(jsonPath("$.id").value(10))
+                .andExpect(jsonPath("$.nombre").value("Eduardo"))
+                .andExpect(jsonPath("$.correo").value("eduardo@test.com"))
                 .andExpect(jsonPath("$.rolNombre").value("ROLE_USER"));
     }
 
@@ -123,6 +151,19 @@ public class AuthControllerTest extends AbstractContainerBaseTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"correo\":\"noexiste@test.com\",\"password\":\"Password123!\"}"))
                 .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @DisplayName("Debe retornar 401 si las credenciales son incorrectas")
+    void debeRetornarUnauthorizedSiCredencialesSonIncorrectas() throws Exception {
+        when(usuarioRepository.findByCorreoIgnoreCase("eduardo@test.com"))
+                .thenReturn(Optional.empty());
+
+        mockMvc.perform(post("/api/v1/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"correo\":\"eduardo@test.com\",\"password\":\"incorrecta\"}"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().string("Correo o contraseña incorrectos"));
     }
 
     @Test
@@ -174,6 +215,25 @@ public class AuthControllerTest extends AbstractContainerBaseTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"correo\":\"juan@test.com\",\"password\":\"NuevaPassword123!\"}"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Debe actualizar contraseña correctamente")
+    void debeActualizarPasswordCorrectamente() throws Exception {
+        UsuarioModel usuario = usuarioEduardo();
+
+        when(usuarioRepository.findByCorreoIgnoreCase("eduardo@test.com"))
+                .thenReturn(Optional.of(usuario));
+        when(passwordEncoder.encode("nueva123"))
+                .thenReturn("$2a$10$newhash");
+        when(usuarioRepository.save(any(UsuarioModel.class)))
+                .thenReturn(usuario);
+
+        mockMvc.perform(post("/api/v1/auth/reset-password")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"correo\":\"eduardo@test.com\",\"password\":\"nueva123\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Contraseña actualizada correctamente"));
     }
 
     @Test
@@ -234,21 +294,31 @@ public class AuthControllerTest extends AbstractContainerBaseTest {
 
     @Test
     void googleSync_usuarioExistente_retornaTokenSinCrear() throws Exception {
-        UsuarioModel usuarioExistente = usuarioConRol();
-        usuarioExistente.setCorreo("existente@gmail.com");
+        RolModel rol = new RolModel();
+        rol.setId(1L);
+        rol.setNombre("ROLE_USER");
+        rol.setActivo(true);
 
-        when(usuarioRepository.findByCorreoIgnoreCase("existente@gmail.com"))
-                .thenReturn(Optional.of(usuarioExistente));
-        when(jwtUtil.generateToken(anyString(), anyString()))
-                .thenReturn("existing-jwt-token");
+        UsuarioModel usuario = new UsuarioModel();
+        usuario.setId(20L);
+        usuario.setNombre("Eduardo");
+        usuario.setApellidos("Google");
+        usuario.setCorreo("eduardo@gmail.com");
+        usuario.setRol(rol);
+
+        when(usuarioRepository.findByCorreoIgnoreCase("eduardo@gmail.com"))
+                .thenReturn(Optional.of(usuario));
+        when(jwtUtil.generateToken("eduardo@gmail.com", "ROLE_USER"))
+                .thenReturn("google-jwt-token");
 
         mockMvc.perform(post("/api/v1/auth/google/sync")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"correo\":\"existente@gmail.com\",\"nombre\":\"Carlos\"}"))
+                        .content("{\"correo\":\"eduardo@gmail.com\",\"nombre\":\"Eduardo\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.token").value("existing-jwt-token"));
+                .andExpect(jsonPath("$.token").value("google-jwt-token"))
+                .andExpect(jsonPath("$.correo").value("eduardo@gmail.com"))
+                .andExpect(jsonPath("$.rolNombre").value("ROLE_USER"));
 
-        // Verifica que NO se intentó guardar un usuario nuevo
         verify(usuarioRepository, never()).save(any(UsuarioModel.class));
     }
 
