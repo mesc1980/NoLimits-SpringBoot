@@ -1,7 +1,6 @@
 package com.example.NoLimits.service.scraping;
 
 import com.example.NoLimits.Multimedia.service.scraping.ScrapingClientService;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,12 +9,9 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ScrapingClientServiceTest {
 
@@ -27,7 +23,6 @@ class ScrapingClientServiceTest {
         @DisplayName("retorna los datos del precio desde el microservicio de scraping")
         void retornaDatosDelPrecioDesdeMicroservicio() throws Exception {
             ScrapingClientService service = new ScrapingClientService();
-
             RestTemplate restTemplateMock = mock(RestTemplate.class);
 
             Field field = ScrapingClientService.class.getDeclaredField("restTemplate");
@@ -44,9 +39,7 @@ class ScrapingClientServiceTest {
             );
 
             String urlEsperada = "https://nolimits-scraping-service.onrender.com/api/precios?appId=730";
-
-            when(restTemplateMock.getForObject(eq(urlEsperada), eq(Map.class)))
-                    .thenReturn(respuestaMock);
+            when(restTemplateMock.getForObject(eq(urlEsperada), eq(Map.class))).thenReturn(respuestaMock);
 
             Map<String, Object> resultado = service.obtenerPrecioSteam("730");
 
@@ -56,8 +49,42 @@ class ScrapingClientServiceTest {
             assertEquals("Free To Play", resultado.get("precioFormato"));
             assertEquals("CLP", resultado.get("moneda"));
             assertEquals("Steam", resultado.get("plataforma"));
+            verify(restTemplateMock).getForObject(eq(urlEsperada), eq(Map.class));
+        }
+
+        @Test
+        @DisplayName("construye la URL correcta con el appId recibido")
+        void construyeUrlCorrectaConAppId() throws Exception {
+            ScrapingClientService service = new ScrapingClientService();
+            RestTemplate restTemplateMock = mock(RestTemplate.class);
+
+            Field field = ScrapingClientService.class.getDeclaredField("restTemplate");
+            field.setAccessible(true);
+            field.set(service, restTemplateMock);
+
+            String urlEsperada = "https://nolimits-scraping-service.onrender.com/api/precios?appId=1091500";
+            when(restTemplateMock.getForObject(eq(urlEsperada), eq(Map.class))).thenReturn(Map.of("nombre", "Cyberpunk 2077"));
+
+            service.obtenerPrecioSteam("1091500");
 
             verify(restTemplateMock).getForObject(eq(urlEsperada), eq(Map.class));
+        }
+
+        @Test
+        @DisplayName("retorna null si el microservicio no encuentra el juego")
+        void retornaNullSiJuegoNoEncontrado() throws Exception {
+            ScrapingClientService service = new ScrapingClientService();
+            RestTemplate restTemplateMock = mock(RestTemplate.class);
+
+            Field field = ScrapingClientService.class.getDeclaredField("restTemplate");
+            field.setAccessible(true);
+            field.set(service, restTemplateMock);
+
+            when(restTemplateMock.getForObject(anyString(), eq(Map.class))).thenReturn(null);
+
+            Map<String, Object> resultado = service.obtenerPrecioSteam("99999999");
+
+            assertNull(resultado);
         }
     }
 }
