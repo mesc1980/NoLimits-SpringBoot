@@ -54,6 +54,33 @@ class TipoProductoModelTest {
             assertEquals("Contenido audiovisual", model.getDescripcion());
             assertFalse(model.getActivo());
         }
+
+        @Test
+        @DisplayName("permite asignar activo en null")
+        void permiteAsignarActivoNull() {
+
+            // Arrange
+            TipoProductoModel model = new TipoProductoModel();
+
+            // Act & Assert
+            assertDoesNotThrow(() -> model.setActivo(null));
+
+            assertNull(model.getActivo());
+        }
+
+        @Test
+        @DisplayName("debe asignar lista de productos")
+        void debeAsignarListaProductos() {
+
+            // Arrange
+            TipoProductoModel model = new TipoProductoModel();
+
+            // Act
+            model.setProductos(null);
+
+            // Assert
+            assertNull(model.getProductos());
+        }
     }
 
     @Nested
@@ -99,6 +126,115 @@ class TipoProductoModelTest {
             t2.setId(2L);
 
             assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("objetos con id null son iguales")
+        void objetosConIdNullSonIguales() {
+
+            // Arrange
+            TipoProductoModel t1 = new TipoProductoModel();
+            TipoProductoModel t2 = new TipoProductoModel();
+
+            // Act & Assert
+            assertEquals(t1, t2);
+            assertEquals(t1.hashCode(), t2.hashCode());
+        }
+
+        @Test
+        @DisplayName("no es igual a objeto de otra clase")
+        void noEsIgualAObjetoDeOtraClase() {
+
+            // Arrange
+            TipoProductoModel tipo = new TipoProductoModel();
+            tipo.setId(1L);
+
+            String otroObjeto = "texto";
+
+            // Act & Assert
+            assertNotEquals(tipo, otroObjeto);
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+            // Arrange
+            TipoProductoModel tipo = new TipoProductoModel();
+            tipo.setId(1L);
+
+            // Act & Assert
+            assertEquals(tipo, tipo);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+            // Arrange
+            TipoProductoModel tipo = new TipoProductoModel();
+            tipo.setId(1L);
+
+            // Act & Assert
+            assertNotEquals(null, tipo);
+        }
+
+        @Test
+        @DisplayName("objeto con id null no es igual a objeto con id asignado")
+        void objetoConIdNullNoEsIgualAObjetoConId() {
+
+            // Arrange
+            TipoProductoModel t1 = new TipoProductoModel();
+
+            TipoProductoModel t2 = new TipoProductoModel();
+            t2.setId(1L);
+
+            // Act & Assert
+            assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("objeto con id asignado no es igual a objeto con id null")
+        void objetoConIdNoEsIgualAObjetoConIdNull() {
+
+            // Arrange
+            TipoProductoModel t1 = new TipoProductoModel();
+            t1.setId(1L);
+
+            TipoProductoModel t2 = new TipoProductoModel();
+
+            // Act & Assert
+            assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("hashCode con id null")
+        void hashCodeConIdNull() {
+
+            // Arrange
+            TipoProductoModel tipo = new TipoProductoModel();
+
+            // Act
+            int hash = tipo.hashCode();
+
+            // Assert
+            assertDoesNotThrow(() -> tipo.hashCode());
+            assertEquals(hash, tipo.hashCode());
+        }
+
+        @Test
+        @DisplayName("hashCode con id asignado")
+        void hashCodeConIdAsignado() {
+
+            // Arrange
+            TipoProductoModel tipo = new TipoProductoModel();
+            tipo.setId(99L);
+
+            // Act
+            int hash = tipo.hashCode();
+
+            // Assert
+            assertEquals(hash, tipo.hashCode());
         }
     }
 

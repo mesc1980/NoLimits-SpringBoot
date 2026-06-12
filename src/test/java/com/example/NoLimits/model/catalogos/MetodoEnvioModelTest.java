@@ -321,5 +321,248 @@ class MetodoEnvioModelTest {
 
             assertNotEquals(a, b);
         }
+
+        @Test
+        @DisplayName("equals retorna false cuando nombre es null en un objeto")
+        void equalsNombreNullVsValor() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                1L,
+                                null,
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals retorna false cuando descripcion es null en un objeto")
+        void equalsDescripcionNullVsValor() {
+
+                MetodoEnvioModel a =
+                         new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                null,
+                                true,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals retorna false cuando activo es null")
+        void equalsActivoNullVsValor() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                null,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals retorna true cuando ventas son null en ambos")
+        void equalsVentasNullEnAmbos() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta todos los campos null")
+        void hashCodeConCamposNull() {
+
+                MetodoEnvioModel model =
+                        new MetodoEnvioModel(
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                        );
+
+                assertDoesNotThrow(model::hashCode);
+        }
+
+        @Test
+        @DisplayName("equals con id null en ambos objetos")
+        void equalsConIdNull() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                null,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                null,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando id es null en ambos objetos")
+        void equalsIdNull() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                null,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                null,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando descripcion es null")
+        void equalsDescripcionNull() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                null,
+                                true,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                null,
+                                true,
+                                null
+                        );
+
+                assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando activo es null")
+        void equalsActivoNull() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                null,
+                                null
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                null,
+                                null
+                        );
+
+                assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando ventas son listas vacias")
+        void equalsVentasVacias() {
+
+                MetodoEnvioModel a =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                java.util.List.of()
+                        );
+
+                MetodoEnvioModel b =
+                        new MetodoEnvioModel(
+                                1L,
+                                "Retiro",
+                                "Desc",
+                                true,
+                                java.util.List.of()
+                        );
+
+                assertEquals(a, b);
+        }
+
+        
     }
 }

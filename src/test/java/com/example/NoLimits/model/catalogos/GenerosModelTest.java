@@ -127,6 +127,102 @@ class GenerosModelTest {
 
             assertNotEquals(r1, r2);
         }
+
+        @Test
+        @DisplayName("relaciones con producto null son iguales")
+        void relacionesConProductoNullSonIguales() {
+
+            GeneroModel genero = new GeneroModel();
+            genero.setId(2L);
+
+            GenerosModel r1 = new GenerosModel();
+            r1.setGenero(genero);
+
+            GenerosModel r2 = new GenerosModel();
+            r2.setGenero(genero);
+
+            assertEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("relaciones con genero null son iguales")
+        void relacionesConGeneroNullSonIguales() {
+
+            ProductoModel producto = new ProductoModel();
+            producto.setId(1L);
+
+            GenerosModel r1 = new GenerosModel();
+            r1.setProducto(producto);
+
+            GenerosModel r2 = new GenerosModel();
+            r2.setProducto(producto);
+
+            assertEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+            GenerosModel relacion = new GenerosModel();
+
+            assertNotEquals(relacion, null);
+        }
+
+        @Test
+        @DisplayName("no es igual a objeto de otra clase")
+        void noEsIgualAOtroTipo() {
+
+            GenerosModel relacion = new GenerosModel();
+
+            assertNotEquals(relacion, "texto");
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+            GenerosModel relacion = new GenerosModel();
+
+            assertEquals(relacion, relacion);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta producto y genero null")
+        void hashCodeSoportaValoresNull() {
+
+            GenerosModel relacion = new GenerosModel();
+
+            assertDoesNotThrow(relacion::hashCode);
+        }
+
+        @Test
+        @DisplayName("equals es simétrico para ids nulos")
+        void equalsEsSimetricoParaIdsNulos() {
+
+            GenerosModel r1 = new GenerosModel();
+            GenerosModel r2 = new GenerosModel();
+
+            assertTrue(r1.equals(r2));
+            assertTrue(r2.equals(r1));
+        }
+
+        @Test
+        @DisplayName("equals es simétrico para misma relación")
+        void equalsEsSimetricoParaMismaRelacion() {
+
+            ProductoModel producto = new ProductoModel();
+            producto.setId(1L);
+
+            GeneroModel genero = new GeneroModel();
+            genero.setId(2L);
+
+            GenerosModel r1 = new GenerosModel(1L, producto, genero);
+            GenerosModel r2 = new GenerosModel(2L, producto, genero);
+
+            assertTrue(r1.equals(r2));
+            assertTrue(r2.equals(r1));
+        }
     }
 
     @Nested
