@@ -127,6 +127,148 @@ class EmpresasModelTest {
 
             assertNotEquals(r1, r2);
         }
+
+        @Test
+        @DisplayName("relaciones con producto null son iguales")
+        void relacionesConProductoNullSonIguales() {
+
+            EmpresaModel empresa = new EmpresaModel();
+            empresa.setId(2L);
+
+            EmpresasModel r1 = new EmpresasModel();
+            r1.setEmpresa(empresa);
+
+            EmpresasModel r2 = new EmpresasModel();
+            r2.setEmpresa(empresa);
+
+            assertEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("relaciones con empresa null son iguales")
+        void relacionesConEmpresaNullSonIguales() {
+
+            ProductoModel producto = new ProductoModel();
+            producto.setId(1L);
+
+            EmpresasModel r1 = new EmpresasModel();
+            r1.setProducto(producto);
+
+            EmpresasModel r2 = new EmpresasModel();
+            r2.setProducto(producto);
+
+            assertEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+            EmpresasModel relacion = new EmpresasModel();
+
+            assertNotEquals(relacion, null);
+        }
+
+        @Test
+        @DisplayName("no es igual a objeto de otra clase")
+        void noEsIgualAOtroTipo() {
+
+            EmpresasModel relacion = new EmpresasModel();
+
+            assertNotEquals(relacion, "texto");
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+            EmpresasModel relacion = new EmpresasModel();
+
+            assertEquals(relacion, relacion);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta valores null")
+        void hashCodeSoportaValoresNull() {
+
+            EmpresasModel relacion = new EmpresasModel();
+
+            assertDoesNotThrow(relacion::hashCode);
+        }
+
+        @Test
+        @DisplayName("relaciones con empresa distinta no son iguales")
+        void relacionesConEmpresaDistintaNoSonIguales() {
+
+            ProductoModel producto = new ProductoModel();
+            producto.setId(1L);
+
+            EmpresaModel empresa1 = new EmpresaModel();
+            empresa1.setId(10L);
+
+            EmpresaModel empresa2 = new EmpresaModel();
+            empresa2.setId(20L);
+
+            EmpresasModel r1 = new EmpresasModel();
+            r1.setProducto(producto);
+            r1.setEmpresa(empresa1);
+
+            EmpresasModel r2 = new EmpresasModel();
+            r2.setProducto(producto);
+            r2.setEmpresa(empresa2);
+
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("producto null versus producto con valor no son iguales")
+        void productoNullVsProductoConValor() {
+
+            EmpresaModel empresa = new EmpresaModel();
+            empresa.setId(1L);
+
+            ProductoModel producto = new ProductoModel();
+            producto.setId(1L);
+
+            EmpresasModel r1 = new EmpresasModel();
+            r1.setEmpresa(empresa);
+
+            EmpresasModel r2 = new EmpresasModel();
+            r2.setEmpresa(empresa);
+            r2.setProducto(producto);
+
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("empresa null versus empresa con valor no son iguales")
+        void empresaNullVsEmpresaConValor() {
+
+            ProductoModel producto = new ProductoModel();
+            producto.setId(1L);
+
+            EmpresaModel empresa = new EmpresaModel();
+            empresa.setId(1L);
+
+            EmpresasModel r1 = new EmpresasModel();
+            r1.setProducto(producto);
+
+            EmpresasModel r2 = new EmpresasModel();
+            r2.setProducto(producto);
+            r2.setEmpresa(empresa);
+
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("ambos valores null son iguales")
+        void ambosValoresNullSonIguales() {
+
+            EmpresasModel r1 = new EmpresasModel();
+            EmpresasModel r2 = new EmpresasModel();
+
+            assertEquals(r1, r2);
+        }
     }
 
     @Nested

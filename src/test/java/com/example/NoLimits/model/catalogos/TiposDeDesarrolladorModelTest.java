@@ -103,6 +103,82 @@ class TiposDeDesarrolladorModelTest {
 
             assertNotEquals(r1, r2);
         }
+
+        @Test
+        @DisplayName("objetos con id null son iguales")
+        void objetosConIdNullSonIguales() {
+
+                TiposDeDesarrolladorModel r1 = new TiposDeDesarrolladorModel();
+                TiposDeDesarrolladorModel r2 = new TiposDeDesarrolladorModel();
+
+                assertEquals(r1, r2);
+                assertEquals(r1.hashCode(), r2.hashCode());
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+                TiposDeDesarrolladorModel model = new TiposDeDesarrolladorModel();
+                model.setId(1L);
+
+                assertEquals(model, model);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+                TiposDeDesarrolladorModel model = new TiposDeDesarrolladorModel();
+                model.setId(1L);
+
+                assertNotEquals(model, null);
+        }
+
+        @Test
+        @DisplayName("no es igual a objeto de otra clase")
+        void noEsIgualAOtraClase() {
+
+                TiposDeDesarrolladorModel model = new TiposDeDesarrolladorModel();
+                model.setId(1L);
+
+                assertNotEquals(model, "texto");
+        }
+
+        @Test
+        @DisplayName("hashCode con id null")
+        void hashCodeConIdNull() {
+
+                TiposDeDesarrolladorModel model = new TiposDeDesarrolladorModel();
+
+                int hash = model.hashCode();
+
+                assertEquals(hash, model.hashCode());
+        }
+
+        @Test
+        @DisplayName("id null y id con valor no son iguales")
+        void idNullYIdConValorNoSonIguales() {
+
+                TiposDeDesarrolladorModel r1 = new TiposDeDesarrolladorModel();
+
+                TiposDeDesarrolladorModel r2 = new TiposDeDesarrolladorModel();
+                r2.setId(1L);
+
+                assertNotEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("id con valor y id null no son iguales")
+        void idConValorYIdNullNoSonIguales() {
+
+                TiposDeDesarrolladorModel r1 = new TiposDeDesarrolladorModel();
+                r1.setId(1L);
+
+                TiposDeDesarrolladorModel r2 = new TiposDeDesarrolladorModel();
+
+                assertNotEquals(r1, r2);
+        }
     }
 
     @Nested
