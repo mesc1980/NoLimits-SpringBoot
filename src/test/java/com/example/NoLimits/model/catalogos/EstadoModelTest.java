@@ -267,5 +267,246 @@ class EstadoModelTest {
 
             assertNotEquals(a, b);
         }
+
+        @Test
+        @DisplayName("equals cuando nombre es distinto")
+        void equalsNombreDistinto() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Agotado",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando productos son distintos")
+        void equalsProductosDistintos() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            true,
+                            java.util.List.of()
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando id es null")
+        void equalsIdNull() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            null,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            null,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando activo es null")
+        void equalsActivoNull() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            null,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            null,
+                            null
+                    );
+
+            assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando descripcion es null")
+        void equalsDescripcionNull() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            null,
+                            true,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            null,
+                            true,
+                            null
+                    );
+
+            assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta todos los campos null")
+        void hashCodeTodosNull() {
+
+            EstadoModel model =
+                    new EstadoModel(
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                    );
+
+            assertDoesNotThrow(model::hashCode);
+        }
+
+        @Test
+        @DisplayName("equals cuando nombre es null en ambos")
+        void equalsNombreNull() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            null,
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            null,
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando nombre es null solo en uno")
+        void equalsNombreNullSoloUno() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            null,
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando descripcion es null solo en uno")
+        void equalsDescripcionNullSoloUno() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            null,
+                            true,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando activo es null solo en uno")
+        void equalsActivoNullSoloUno() {
+
+            EstadoModel a =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            null,
+                            null
+                    );
+
+            EstadoModel b =
+                    new EstadoModel(
+                            1L,
+                            "Activo",
+                            "Desc",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
     }
 }

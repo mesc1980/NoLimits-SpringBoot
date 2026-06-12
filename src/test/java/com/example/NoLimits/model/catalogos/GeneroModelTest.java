@@ -46,6 +46,20 @@ class GeneroModelTest {
             assertEquals(10L, model.getId());
             assertEquals("RPG", model.getNombre());
         }
+
+        @Test
+        @DisplayName("debe asignar lista de productos")
+        void debeAsignarListaProductos() {
+
+            // Arrange
+            GeneroModel model = new GeneroModel();
+
+            // Act
+            model.setProductos(null);
+
+            // Assert
+            assertNull(model.getProductos());
+        }
     }
 
     @Nested
@@ -78,6 +92,127 @@ class GeneroModelTest {
 
             assertNotEquals(g1, g2);
         }
+
+        @Test
+        @DisplayName("objetos con id null son iguales")
+        void objetosConIdNullSonIguales() {
+
+            // Arrange
+            GeneroModel g1 = new GeneroModel();
+            GeneroModel g2 = new GeneroModel();
+
+            // Act & Assert
+            assertEquals(g1, g2);
+            assertEquals(g1.hashCode(), g2.hashCode());
+        }
+
+        @Test
+        @DisplayName("id null y id con valor no son iguales")
+        void idNullYIdConValorNoSonIguales() {
+
+            // Arrange
+            GeneroModel g1 = new GeneroModel();
+
+            GeneroModel g2 = new GeneroModel();
+            g2.setId(1L);
+
+            // Act & Assert
+            assertNotEquals(g1, g2);
+        }
+        
+        @Test
+        @DisplayName("id con valor y id null no son iguales")
+        void idConValorYIdNullNoSonIguales() {
+
+            // Arrange
+            GeneroModel g1 = new GeneroModel();
+            g1.setId(1L);
+
+            GeneroModel g2 = new GeneroModel();
+
+            // Act & Assert
+            assertNotEquals(g1, g2);
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+            // Arrange
+            GeneroModel genero = new GeneroModel();
+            genero.setId(1L);
+
+            // Act & Assert
+            assertEquals(genero, genero);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+            // Arrange
+            GeneroModel genero = new GeneroModel();
+            genero.setId(1L);
+
+            // Act & Assert
+            assertNotEquals(genero, null);
+        }
+
+        @Test
+        @DisplayName("no es igual a objeto de otra clase")
+        void noEsIgualAObjetoDeOtraClase() {
+
+            // Arrange
+            GeneroModel genero = new GeneroModel();
+            genero.setId(1L);
+
+            // Act & Assert
+            assertNotEquals(genero, "texto");
+        }
+
+        @Test
+        @DisplayName("equals es simétrico para ids nulos")
+        void equalsEsSimetricoParaIdsNulos() {
+
+            // Arrange
+            GeneroModel g1 = new GeneroModel();
+            GeneroModel g2 = new GeneroModel();
+
+            // Act & Assert
+            assertTrue(g1.equals(g2));
+            assertTrue(g2.equals(g1));
+        }
+
+        @Test
+        @DisplayName("equals es simétrico para mismo id")
+        void equalsEsSimetricoParaMismoId() {
+
+            // Arrange
+            GeneroModel g1 = new GeneroModel();
+            g1.setId(1L);
+
+            GeneroModel g2 = new GeneroModel();
+            g2.setId(1L);
+
+            // Act & Assert
+            assertTrue(g1.equals(g2));
+            assertTrue(g2.equals(g1));
+        }
+    
+        @Test
+        @DisplayName("hashCode con id null")
+        void hashCodeConIdNull() {
+
+            // Arrange
+            GeneroModel genero = new GeneroModel();
+
+            // Act
+            int hash = genero.hashCode();
+
+            // Assert
+            assertDoesNotThrow(() -> genero.hashCode());
+            assertEquals(hash, genero.hashCode());
+        } 
     }
 
     @Nested

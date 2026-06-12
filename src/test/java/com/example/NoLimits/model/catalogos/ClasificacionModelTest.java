@@ -343,5 +343,115 @@ class ClasificacionModelTest {
 
             assertNotEquals(a, b);
         }
+
+        @Test
+        @DisplayName("equals cuando nombre es null en un objeto")
+        void testEqualsNombreNullVsValor() {
+
+                ClasificacionModel a =
+                        new ClasificacionModel(
+                                1L,
+                                null,
+                                "Desc",
+                                true
+                        );
+
+                ClasificacionModel b =
+                        new ClasificacionModel(
+                                1L,
+                                "T",
+                                "Desc",
+                                true
+                        );
+
+                assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando descripcion es null en un objeto")
+        void testEqualsDescripcionNullVsValor() {
+
+                ClasificacionModel a =
+                         new ClasificacionModel(
+                                1L,
+                                "T",
+                                null,
+                                true
+                        );
+
+                ClasificacionModel b =
+                        new ClasificacionModel(
+                                1L,
+                                "T",
+                                "Desc",
+                                true
+                        );
+
+                assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta campos null")
+        void testHashCodeCamposNull() {
+
+                ClasificacionModel model =
+                        new ClasificacionModel(
+                                null,
+                                null,
+                                null,
+                                true,
+                                null
+                        );
+
+                assertDoesNotThrow(model::hashCode);
+        }
+
+        @Test
+        @DisplayName("equals con productos null en ambos")
+        void testEqualsProductosNull() {
+
+                ClasificacionModel a =
+                        new ClasificacionModel(
+                                1L,
+                                "T",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                ClasificacionModel b =
+                        new ClasificacionModel(
+                                1L,
+                                "T",
+                                "Desc",
+                                true,
+                                null
+                        );
+
+                assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cuando id es null")
+        void testEqualsIdNull() {
+
+                ClasificacionModel a =
+                        new ClasificacionModel(
+                                null,
+                                "T",
+                                "Desc",
+                                true
+                        );
+
+                ClasificacionModel b =
+                        new ClasificacionModel(
+                                null,
+                                "T",
+                                "Desc",
+                                true
+                        );
+
+                assertEquals(a, b);
+        }
     }
 }

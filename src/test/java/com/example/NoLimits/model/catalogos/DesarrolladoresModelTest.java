@@ -132,6 +132,138 @@ class DesarrolladoresModelTest {
 
             assertNotEquals(r1, r2);
         }
+
+        @Test
+        @DisplayName("relaciones con producto null son iguales")
+        void relacionesConProductoNullSonIguales() {
+
+                DesarrolladorModel desarrollador = new DesarrolladorModel();
+                desarrollador.setId(2L);
+
+                DesarrolladoresModel r1 = new DesarrolladoresModel();
+                r1.setDesarrollador(desarrollador);
+
+                DesarrolladoresModel r2 = new DesarrolladoresModel();
+                r2.setDesarrollador(desarrollador);
+
+                assertEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("relaciones con desarrollador null son iguales")
+        void relacionesConDesarrolladorNullSonIguales() {
+
+                ProductoModel producto = new ProductoModel();
+                producto.setId(1L);
+
+                DesarrolladoresModel r1 = new DesarrolladoresModel();
+                r1.setProducto(producto);
+
+                DesarrolladoresModel r2 = new DesarrolladoresModel();
+                r2.setProducto(producto);
+
+                assertEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+                DesarrolladoresModel relacion = new DesarrolladoresModel();
+
+                assertNotEquals(relacion, null);
+        }
+
+        @Test
+        @DisplayName("no es igual a objeto de otra clase")
+        void noEsIgualAOtroTipo() {
+
+                DesarrolladoresModel relacion = new DesarrolladoresModel();
+
+                assertNotEquals(relacion, "texto");
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+                DesarrolladoresModel relacion = new DesarrolladoresModel();
+
+                assertEquals(relacion, relacion);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta valores null")
+        void hashCodeSoportaValoresNull() {
+
+                DesarrolladoresModel relacion = new DesarrolladoresModel();
+
+                assertDoesNotThrow(relacion::hashCode);
+        }
+
+        @Test
+        @DisplayName("desarrolladores distintos no son iguales")
+        void desarrolladoresDistintosNoSonIguales() {
+
+                ProductoModel producto = new ProductoModel();
+                producto.setId(1L);
+
+                DesarrolladorModel d1 = new DesarrolladorModel();
+                d1.setId(10L);
+
+                DesarrolladorModel d2 = new DesarrolladorModel();
+                d2.setId(20L);
+
+                DesarrolladoresModel r1 = new DesarrolladoresModel();
+                r1.setProducto(producto);
+                r1.setDesarrollador(d1);
+
+                DesarrolladoresModel r2 = new DesarrolladoresModel();
+                r2.setProducto(producto);
+                r2.setDesarrollador(d2);
+
+                assertNotEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("producto null versus producto con valor")
+        void productoNullVsProductoConValor() {
+
+                DesarrolladorModel desarrollador = new DesarrolladorModel();
+                desarrollador.setId(1L);
+
+                ProductoModel producto = new ProductoModel();
+                producto.setId(1L);
+
+                DesarrolladoresModel r1 = new DesarrolladoresModel();
+                r1.setDesarrollador(desarrollador);
+
+                DesarrolladoresModel r2 = new DesarrolladoresModel();
+                r2.setDesarrollador(desarrollador);
+                r2.setProducto(producto);
+
+                assertNotEquals(r1, r2);
+        }
+
+        @Test
+        @DisplayName("desarrollador null versus desarrollador con valor")
+        void desarrolladorNullVsDesarrolladorConValor() {
+
+                ProductoModel producto = new ProductoModel();
+                producto.setId(1L);
+
+                DesarrolladorModel desarrollador = new DesarrolladorModel();
+                desarrollador.setId(1L);
+
+                DesarrolladoresModel r1 = new DesarrolladoresModel();
+                r1.setProducto(producto);
+
+                DesarrolladoresModel r2 = new DesarrolladoresModel();
+                r2.setProducto(producto);
+                r2.setDesarrollador(desarrollador);
+
+                assertNotEquals(r1, r2);
+        }
     }
 
     @Nested

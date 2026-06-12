@@ -48,6 +48,30 @@ class TipoDeDesarrolladorModelTest {
             assertEquals(10L, model.getId());
             assertEquals("Publisher", model.getNombre());
         }
+
+        @Test
+        @DisplayName("debe asignar lista de desarrolladores")
+        void debeAsignarListaDesarrolladores() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            model.setDesarrolladores(null);
+
+            assertNull(model.getDesarrolladores());
+        }
+
+        @Test
+        @DisplayName("debe asignar y obtener desarrolladores")
+        void debeAsignarYObtenerDesarrolladores() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            model.setDesarrolladores(java.util.List.of());
+
+            assertNotNull(model.getDesarrolladores());
+        }
     }
 
     @Nested
@@ -85,6 +109,181 @@ class TipoDeDesarrolladorModelTest {
             t2.setId(2L);
 
             assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("es igual a si mismo")
+        void esIgualASiMismo() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertEquals(model, model);
+        }
+
+        @Test
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertNotEquals(model, null);
+        }
+
+        @Test
+        @DisplayName("no es igual a otra clase")
+        void noEsIgualAOtraClase() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertNotEquals(model, "texto");
+        }
+
+        @Test
+        @DisplayName("objetos con nombre distinto no son iguales")
+        void objetosConNombreDistintoNoSonIguales() {
+
+            TipoDeDesarrolladorModel t1 =
+                    new TipoDeDesarrolladorModel();
+            t1.setId(1L);
+            t1.setNombre("Estudio");
+
+            TipoDeDesarrolladorModel t2 =
+                    new TipoDeDesarrolladorModel();
+            t2.setId(1L);
+            t2.setNombre("Publisher");
+
+            assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("objetos con nombre null son iguales")
+        void objetosConNombreNullSonIguales() {
+
+            TipoDeDesarrolladorModel t1 =
+                    new TipoDeDesarrolladorModel();
+            t1.setId(1L);
+
+            TipoDeDesarrolladorModel t2 =
+                    new TipoDeDesarrolladorModel();
+            t2.setId(1L);
+
+            assertEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("listas null en ambos objetos")
+        void listasNullEnAmbosObjetos() {
+
+            TipoDeDesarrolladorModel t1 =
+                    new TipoDeDesarrolladorModel(
+                            1L,
+                            "Estudio",
+                            null
+                    );
+
+            TipoDeDesarrolladorModel t2 =
+                    new TipoDeDesarrolladorModel(
+                            1L,
+                            "Estudio",
+                            null
+                    );
+
+            assertEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("listas distintas no son iguales")
+        void listasDistintasNoSonIguales() {
+
+            TipoDeDesarrolladorModel t1 =
+                    new TipoDeDesarrolladorModel(
+                            1L,
+                            "Estudio",
+                            java.util.List.of()
+                    );
+
+            TipoDeDesarrolladorModel t2 =
+                    new TipoDeDesarrolladorModel(
+                            1L,
+                            "Estudio",
+                            null
+                    );
+
+            assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta valores null")
+        void hashCodeSoportaValoresNull() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertDoesNotThrow(model::hashCode);
+        }
+
+        @Test
+        @DisplayName("objetos con listas distintas no son iguales")
+        void objetosConListasDistintasNoSonIguales() {
+
+            TipoDeDesarrolladorModel t1 =
+                    new TipoDeDesarrolladorModel(
+                            1L,
+                            "Estudio",
+                            java.util.List.of()
+                    );
+
+            TipoDeDesarrolladorModel t2 =
+                    new TipoDeDesarrolladorModel(
+                            1L,
+                            "Estudio",
+                            null
+                    );
+
+            assertNotEquals(t1, t2);
+        }
+
+        @Test
+        @DisplayName("equals retorna false con null")
+        void equalsConNull() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertNotEquals(model, null);
+        }
+
+        @Test
+        @DisplayName("equals retorna false con otra clase")
+        void equalsConOtraClase() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertNotEquals(model, "texto");
+        }
+
+        @Test
+        @DisplayName("equals retorna true consigo mismo")
+        void equalsConsigoMismo() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertEquals(model, model);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta campos null")
+        void hashCodeSoportaCamposNull() {
+
+            TipoDeDesarrolladorModel model =
+                    new TipoDeDesarrolladorModel();
+
+            assertDoesNotThrow(model::hashCode);
         }
     }
 

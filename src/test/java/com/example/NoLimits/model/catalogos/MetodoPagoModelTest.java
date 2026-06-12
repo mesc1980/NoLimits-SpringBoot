@@ -50,6 +50,17 @@ class MetodoPagoModelTest {
             assertEquals("Transferencia", model.getNombre());
             assertFalse(model.getActivo());
         }
+
+        @Test
+        @DisplayName("setVentas y getVentas funcionan")
+        void setVentasYGetVentasFuncionan() {
+
+            MetodoPagoModel model = new MetodoPagoModel();
+
+            model.setVentas(new java.util.ArrayList<>());
+
+            assertNotNull(model.getVentas());
+        }
     }
 
     @Nested
@@ -160,6 +171,163 @@ class MetodoPagoModelTest {
             MetodoPagoModel model = new MetodoPagoModel();
 
             assertNotNull(model.toString());
+        }
+
+        @Test
+        @DisplayName("equals retorna false con null")
+        void equalsConNull() {
+
+            MetodoPagoModel model = new MetodoPagoModel();
+
+            assertNotEquals(null, model);
+        }
+
+        @Test
+        @DisplayName("equals retorna false con otra clase")
+        void equalsConOtraClase() {
+
+            MetodoPagoModel model = new MetodoPagoModel();
+
+            assertNotEquals("texto", model);
+        }
+
+        @Test
+        @DisplayName("equals retorna true consigo mismo")
+        void equalsConsigoMismo() {
+
+            MetodoPagoModel model = new MetodoPagoModel();
+
+            assertEquals(model, model);
+        }
+
+        @Test
+        @DisplayName("equals retorna false cuando id es distinto")
+        void equalsIdDistinto() {
+
+            MetodoPagoModel a =
+                    new MetodoPagoModel(
+                            1L,
+                            "Tarjeta",
+                            true,
+                            null
+                    );
+
+            MetodoPagoModel b =
+                    new MetodoPagoModel(
+                            2L,
+                            "Tarjeta",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals retorna false cuando nombre es distinto")
+        void equalsNombreDistinto() {
+
+            MetodoPagoModel a =
+                    new MetodoPagoModel(
+                            1L,
+                            "Tarjeta",
+                            true,
+                            null
+                    );
+
+            MetodoPagoModel b =
+                    new MetodoPagoModel(
+                            1L,
+                            "Transferencia",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals retorna false cuando activo es distinto")
+        void equalsActivoDistinto() {
+
+            MetodoPagoModel a =
+                    new MetodoPagoModel(
+                            1L,
+                            "Tarjeta",
+                            true,
+                            null
+                    );
+
+            MetodoPagoModel b =
+                    new MetodoPagoModel(
+                            1L,
+                            "Tarjeta",
+                            false,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals retorna false cuando ventas son distintas")
+        void equalsVentasDistintas() {
+
+            MetodoPagoModel a =
+                    new MetodoPagoModel(
+                            1L,
+                            "Tarjeta",
+                            true,
+                            java.util.List.of()
+                    );
+
+            MetodoPagoModel b =
+                    new MetodoPagoModel(
+                            1L,
+                            "Tarjeta",
+                            true,
+                            null
+                    );
+
+            assertNotEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("equals cubre campos null")
+        void equalsCamposNull() {
+
+            MetodoPagoModel a =
+                    new MetodoPagoModel(
+                            1L,
+                            null,
+                            null,
+                            null
+                    );
+
+            MetodoPagoModel b =
+                    new MetodoPagoModel(
+                            1L,
+                            null,
+                            null,
+                            null
+                    );
+
+            assertEquals(a, b);
+        }
+
+        @Test
+        @DisplayName("hashCode soporta campos null")
+        void hashCodeCamposNull() {
+
+            MetodoPagoModel model =
+                    new MetodoPagoModel(
+                            null,
+                            null,
+                            null,
+                            null
+                    );
+
+            assertDoesNotThrow(model::hashCode);
         }
     }
 }
