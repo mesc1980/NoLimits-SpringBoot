@@ -11,141 +11,232 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductoUpdateDTOTest {
+@DisplayName("ProductoUpdateDTO - Cobertura de ramas equals/hashCode")
+class ProductoUpdateDTOBranchTest {
 
-    @Nested
-    @DisplayName("Getters y Setters")
-    class GettersSetters {
+    private LinkCompraDTO link(Long plataformaId, String url) {
+        LinkCompraDTO l = new LinkCompraDTO();
+        l.setPlataformaId(plataformaId);
+        l.setUrl(url);
+        return l;
+    }
 
-        @Test
-        @DisplayName("asigna y obtiene todos los campos correctamente")
-        void testGettersSetters() {
+    private ProductoUpdateDTO full() {
+        ProductoUpdateDTO dto = new ProductoUpdateDTO();
+        dto.setNombre("Spider-Man Remaster");
+        dto.setPrecio(14990.0);
+        dto.setSinopsis("Un joven héroe descubre sus poderes.");
+        dto.setUrlTrailer("https://www.youtube.com/watch?v=test");
+        dto.setAnio(2011);
+        dto.setTipoProductoId(2L);
+        dto.setClasificacionId(3L);
+        dto.setEstadoId(1L);
+        dto.setTipoEmpresaId(10L);
+        dto.setTipoDesarrolladorId(20L);
+        dto.setImagenesRutas(List.of("https://.../img1.webp"));
+        dto.setLinksCompra(List.of(link(1L, "https://store.steampowered.com/app/test")));
+        dto.setSaga("El Señor de los Anillos");
+        dto.setPortadaSaga("/assets/img/sagas/lotrSaga.webp");
+        dto.setPlataformasIds(List.of(1L, 2L));
+        dto.setGenerosIds(List.of(3L, 4L));
+        dto.setEmpresasIds(List.of(5L));
+        dto.setDesarrolladoresIds(List.of(7L, 8L));
+        return dto;
+    }
 
-            ProductoUpdateDTO dto = new ProductoUpdateDTO();
-
-            LinkCompraDTO link = new LinkCompraDTO();
-            link.setPlataformaId(1L);
-            link.setUrl("https://store.steampowered.com/app/test");
-
-            dto.setNombre("Spider-Man Remaster");
-            dto.setPrecio(14990.0);
-            dto.setSinopsis("Un joven héroe descubre sus poderes.");
-            dto.setUrlTrailer("https://youtube.com/test");
-            dto.setAnio(2011);
-
-            dto.setTipoProductoId(2L);
-            dto.setClasificacionId(3L);
-            dto.setEstadoId(1L);
-
-            dto.setTipoEmpresaId(10L);
-            dto.setTipoDesarrolladorId(20L);
-
-            dto.setSaga("Marvel");
-            dto.setPortadaSaga("sagas/marvel.webp");
-
-            dto.setPlataformasIds(List.of(1L, 2L));
-            dto.setGenerosIds(List.of(3L, 4L));
-            dto.setEmpresasIds(List.of(5L));
-            dto.setDesarrolladoresIds(List.of(6L, 7L));
-
-            dto.setImagenesRutas(List.of("img1.webp", "img2.webp"));
-            dto.setLinksCompra(List.of(link));
-
-            assertEquals("Spider-Man Remaster", dto.getNombre());
-            assertEquals(14990.0, dto.getPrecio());
-            assertEquals("Un joven héroe descubre sus poderes.", dto.getSinopsis());
-            assertEquals("https://youtube.com/test", dto.getUrlTrailer());
-            assertEquals(2011, dto.getAnio());
-
-            assertEquals(2L, dto.getTipoProductoId());
-            assertEquals(3L, dto.getClasificacionId());
-            assertEquals(1L, dto.getEstadoId());
-
-            assertEquals(10L, dto.getTipoEmpresaId());
-            assertEquals(20L, dto.getTipoDesarrolladorId());
-
-            assertEquals("Marvel", dto.getSaga());
-            assertEquals("sagas/marvel.webp", dto.getPortadaSaga());
-
-            assertEquals(List.of(1L, 2L), dto.getPlataformasIds());
-            assertEquals(List.of(3L, 4L), dto.getGenerosIds());
-            assertEquals(List.of(5L), dto.getEmpresasIds());
-            assertEquals(List.of(6L, 7L), dto.getDesarrolladoresIds());
-
-            assertEquals(List.of("img1.webp", "img2.webp"), dto.getImagenesRutas());
-
-            assertEquals(1, dto.getLinksCompra().size());
-            assertEquals(1L, dto.getLinksCompra().get(0).getPlataformaId());
-        }
+    /**
+     * Instancia con todos los campos distintos a full(), del mismo tipo.
+     */
+    private ProductoUpdateDTO fullAlternativo() {
+        ProductoUpdateDTO dto = new ProductoUpdateDTO();
+        dto.setNombre("Mario Kart 8");
+        dto.setPrecio(29990.0);
+        dto.setSinopsis("Carreras de karts.");
+        dto.setUrlTrailer("https://www.youtube.com/watch?v=otro");
+        dto.setAnio(2017);
+        dto.setTipoProductoId(99L);
+        dto.setClasificacionId(98L);
+        dto.setEstadoId(97L);
+        dto.setTipoEmpresaId(100L);
+        dto.setTipoDesarrolladorId(200L);
+        dto.setImagenesRutas(List.of("https://.../otro.webp"));
+        dto.setLinksCompra(List.of(link(2L, "https://www.nintendo.com/otro")));
+        dto.setSaga("Mario");
+        dto.setPortadaSaga("/assets/img/sagas/marioSaga.webp");
+        dto.setPlataformasIds(List.of(9L));
+        dto.setGenerosIds(List.of(8L));
+        dto.setEmpresasIds(List.of(7L));
+        dto.setDesarrolladoresIds(List.of(6L));
+        return dto;
     }
 
     @Nested
-    @DisplayName("Valores por defecto")
-    class ValoresPorDefecto {
+    @DisplayName("equals - casos generales")
+    class EqualsGenerales {
 
         @Test
-        @DisplayName("inicia con todos los campos nulos")
-        void testValoresPorDefecto() {
-
-            ProductoUpdateDTO dto = new ProductoUpdateDTO();
-
-            assertNull(dto.getNombre());
-            assertNull(dto.getPrecio());
-            assertNull(dto.getSinopsis());
-            assertNull(dto.getUrlTrailer());
-            assertNull(dto.getAnio());
-
-            assertNull(dto.getTipoProductoId());
-            assertNull(dto.getClasificacionId());
-            assertNull(dto.getEstadoId());
-
-            assertNull(dto.getTipoEmpresaId());
-            assertNull(dto.getTipoDesarrolladorId());
-
-            assertNull(dto.getSaga());
-            assertNull(dto.getPortadaSaga());
-
-            assertNull(dto.getPlataformasIds());
-            assertNull(dto.getGenerosIds());
-            assertNull(dto.getEmpresasIds());
-            assertNull(dto.getDesarrolladoresIds());
-
-            assertNull(dto.getImagenesRutas());
-            assertNull(dto.getLinksCompra());
+        @DisplayName("es igual a sí mismo")
+        void igualASiMismo() {
+            ProductoUpdateDTO dto = full();
+            assertEquals(dto, dto);
         }
-    }
-
-    @Nested
-    @DisplayName("Métodos Lombok")
-    class MetodosLombok {
 
         @Test
-        @DisplayName("genera equals y hashCode correctamente")
-        void testEqualsYHashCode() {
+        @DisplayName("no es igual a null")
+        void noEsIgualANull() {
+            ProductoUpdateDTO dto = full();
+            assertNotEquals(null, dto);
+        }
 
-            ProductoUpdateDTO dto1 = new ProductoUpdateDTO();
-            dto1.setNombre("Spider-Man");
-            dto1.setPrecio(14990.0);
+        @Test
+        @DisplayName("no es igual a un objeto de otra clase")
+        void noEsIgualAOtraClase() {
+            ProductoUpdateDTO dto = full();
+            assertNotEquals(dto, "no soy un ProductoUpdateDTO");
+        }
 
-            ProductoUpdateDTO dto2 = new ProductoUpdateDTO();
-            dto2.setNombre("Spider-Man");
-            dto2.setPrecio(14990.0);
-
+        @Test
+        @DisplayName("dos instancias completas con los mismos valores son iguales")
+        void instanciasCompletasIgualesSonIguales() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = full();
             assertEquals(dto1, dto2);
             assertEquals(dto1.hashCode(), dto2.hashCode());
         }
 
         @Test
-        @DisplayName("genera toString correctamente")
-        void testToString() {
+        @DisplayName("dos instancias vacías son iguales")
+        void instanciasVaciasSonIguales() {
+            ProductoUpdateDTO dto1 = new ProductoUpdateDTO();
+            ProductoUpdateDTO dto2 = new ProductoUpdateDTO();
+            assertEquals(dto1, dto2);
+            assertEquals(dto1.hashCode(), dto2.hashCode());
+        }
+    }
 
+    @Nested
+    @DisplayName("equals - diferencias entre instancias")
+    class EqualsDiferencias {
+
+        @Test
+        @DisplayName("dos instancias completas con todos los campos distintos no son iguales")
+        void instanciasCompletamenteDistintasNoSonIguales() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = fullAlternativo();
+
+            assertNotEquals(dto1, dto2);
+            assertNotEquals(dto2, dto1);
+        }
+
+        @Test
+        @DisplayName("una instancia completa no es igual a una vacía (todos los campos null vs no-null)")
+        void instanciaCompletaVsVaciaNoSonIguales() {
+            ProductoUpdateDTO completo = full();
+            ProductoUpdateDTO vacio = new ProductoUpdateDTO();
+
+            assertNotEquals(completo, vacio);
+            assertNotEquals(vacio, completo);
+        }
+
+        @Test
+        @DisplayName("difiere solo en nombre")
+        void difiereSoloEnNombre() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = full();
+            dto2.setNombre("Otro nombre");
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("difiere solo en nombre null vs no null")
+        void difiereSoloEnNombreNull() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = full();
+            dto2.setNombre(null);
+
+            assertNotEquals(dto1, dto2);
+            assertNotEquals(dto2, dto1);
+        }
+
+        @Test
+        @DisplayName("difiere solo en precio")
+        void difiereSoloEnPrecio() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = full();
+            dto2.setPrecio(1.0);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("difiere solo en anio")
+        void difiereSoloEnAnio() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = full();
+            dto2.setAnio(1999);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("difiere solo en linksCompra")
+        void difiereSoloEnLinksCompra() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = full();
+            dto2.setLinksCompra(List.of(link(99L, "https://otro.com")));
+
+            assertNotEquals(dto1, dto2);
+        }
+    }
+
+    @Nested
+    @DisplayName("hashCode")
+    class HashCodeTest {
+
+        @Test
+        @DisplayName("hashCode es consistente entre llamadas")
+        void hashCodeConsistente() {
+            ProductoUpdateDTO dto = full();
+            assertEquals(dto.hashCode(), dto.hashCode());
+        }
+
+        @Test
+        @DisplayName("hashCode difiere cuando los valores difieren")
+        void hashCodeDifiereConValoresDistintos() {
+            ProductoUpdateDTO dto1 = full();
+            ProductoUpdateDTO dto2 = fullAlternativo();
+            assertNotEquals(dto1.hashCode(), dto2.hashCode());
+        }
+
+        @Test
+        @DisplayName("hashCode de instancia vacía no lanza excepción")
+        void hashCodeDeInstanciaVacia() {
             ProductoUpdateDTO dto = new ProductoUpdateDTO();
-            dto.setNombre("Spider-Man");
+            assertDoesNotThrow(dto::hashCode);
+        }
+    }
 
+    @Nested
+    @DisplayName("toString")
+    class ToStringTest {
+
+        @Test
+        @DisplayName("toString de instancia completa contiene los valores de los campos")
+        void toStringContieneValores() {
+            ProductoUpdateDTO dto = full();
             String resultado = dto.toString();
 
             assertNotNull(resultado);
-            assertTrue(resultado.contains("Spider-Man"));
+            assertTrue(resultado.contains("nombre"));
+            assertTrue(resultado.contains("Spider-Man Remaster"));
+        }
+
+        @Test
+        @DisplayName("toString de instancia vacía no lanza excepción")
+        void toStringDeInstanciaVacia() {
+            ProductoUpdateDTO dto = new ProductoUpdateDTO();
+            assertDoesNotThrow(dto::toString);
         }
     }
 }
