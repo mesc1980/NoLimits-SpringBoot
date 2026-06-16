@@ -196,15 +196,72 @@ class UsuarioResponseDTOTest {
         @Test
         @DisplayName("equals retorna false cuando cambia región")
         void testEqualsRegionDistinta() {
-
-            // Arrange
             UsuarioResponseDTO dto1 = crearDTO();
             UsuarioResponseDTO dto2 = crearDTO();
-
             dto2.setRegionId(5L);
-
-            // Assert
             assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        void objetosVaciosSonIguales() {
+            assertEquals(new UsuarioResponseDTO(), new UsuarioResponseDTO());
+            assertEquals(new UsuarioResponseDTO().hashCode(), new UsuarioResponseDTO().hashCode());
+        }
+
+        @Test
+        void nullVsValorNombre() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setNombre("Juan");
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorCorreo() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setCorreo("juan@test.cl");
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorApellidos() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setApellidos("Pérez");
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorTelefono() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setTelefono(123456789L);
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorRolId() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setRolId(1L);
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorDireccionId() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setDireccionId(10L);
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorComunaId() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setComunaId(13101L);
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorRegionId() {
+            UsuarioResponseDTO d1 = new UsuarioResponseDTO();
+            UsuarioResponseDTO d2 = new UsuarioResponseDTO(); d2.setRegionId(13L);
+            assertNotEquals(d1, d2);
         }
     }
 

@@ -182,5 +182,21 @@ class ClasificacionResponseDTOTest {
             assertTrue(resultado.contains("descripcion=Contenido apto para adolescentes."));
             assertTrue(resultado.contains("activo=true"));
         }
+        
+        @Test
+        @DisplayName("equals retorna false cuando nombre es null vs valor")
+        void testEqualsNombreNullVsValor() {
+            ClasificacionResponseDTO dto1 = new ClasificacionResponseDTO();
+            ClasificacionResponseDTO dto2 = new ClasificacionResponseDTO();
+            dto2.setNombre("T");
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("objetos vacíos son iguales entre sí")
+        void testVaciosIguales() {
+            assertEquals(new ClasificacionResponseDTO(), new ClasificacionResponseDTO());
+            assertEquals(new ClasificacionResponseDTO().hashCode(), new ClasificacionResponseDTO().hashCode());
+        }
     }
 }

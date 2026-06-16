@@ -119,23 +119,80 @@ class RolModelTest {
 
         @Test
         void objetosConMismoContenidoSonIguales() {
-
-            RolModel r1 = new RolModel();
-            r1.setId(1L);
-
-            RolModel r2 = new RolModel();
-            r2.setId(1L);
-
+            RolModel r1 = new RolModel(); r1.setId(1L);
+            RolModel r2 = new RolModel(); r2.setId(1L);
             assertEquals(r1, r2);
             assertEquals(r1.hashCode(), r2.hashCode());
         }
 
         @Test
         void toStringNoDebeSerNull() {
-
             RolModel rol = new RolModel();
-
             assertNotNull(rol.toString());
+        }
+
+        @Test
+        void equalsMismaInstancia() {
+            RolModel r = new RolModel();
+            assertEquals(r, r);
+        }
+
+        @Test
+        void equalsConNull() {
+            assertNotEquals(null, new RolModel());
+        }
+
+        @Test
+        void equalsConOtraClase() {
+            assertNotEquals("texto", new RolModel());
+        }
+
+        @Test
+        void objetosVaciosSonIguales() {
+            assertEquals(new RolModel(), new RolModel());
+            assertEquals(new RolModel().hashCode(), new RolModel().hashCode());
+        }
+
+        @Test
+        void equalsIdDistinto() {
+            RolModel r1 = new RolModel(); r1.setId(1L);
+            RolModel r2 = new RolModel(); r2.setId(2L);
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        void equalsNombreDistinto() {
+            RolModel r1 = new RolModel(); r1.setNombre("CLIENTE");
+            RolModel r2 = new RolModel(); r2.setNombre("ADMIN");
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        void equalsDescripcionDistinta() {
+            RolModel r1 = new RolModel(); r1.setDescripcion("A");
+            RolModel r2 = new RolModel(); r2.setDescripcion("B");
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        void equalsActivoDistinto() {
+            RolModel r1 = new RolModel(); r1.setActivo(true);
+            RolModel r2 = new RolModel(); r2.setActivo(false);
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        void nullVsValorNombre() {
+            RolModel r1 = new RolModel();
+            RolModel r2 = new RolModel(); r2.setNombre("CLIENTE");
+            assertNotEquals(r1, r2);
+        }
+
+        @Test
+        void nullVsValorDescripcion() {
+            RolModel r1 = new RolModel();
+            RolModel r2 = new RolModel(); r2.setDescripcion("Rol");
+            assertNotEquals(r1, r2);
         }
     }
 }

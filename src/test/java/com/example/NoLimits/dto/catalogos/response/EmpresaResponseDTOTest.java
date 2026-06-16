@@ -160,5 +160,21 @@ class EmpresaResponseDTOTest {
             assertTrue(resultado.contains("nombre=Sony Pictures"));
             assertTrue(resultado.contains("activo=true"));
         }
+
+        @Test
+        @DisplayName("equals retorna false cuando nombre es null vs valor")
+        void testEqualsNombreNullVsValor() {
+            EmpresaResponseDTO dto1 = new EmpresaResponseDTO();
+            EmpresaResponseDTO dto2 = new EmpresaResponseDTO();
+            dto2.setNombre("Sony Pictures");
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("objetos vacíos son iguales entre sí")
+        void testVaciosIguales() {
+            assertEquals(new EmpresaResponseDTO(), new EmpresaResponseDTO());
+            assertEquals(new EmpresaResponseDTO().hashCode(), new EmpresaResponseDTO().hashCode());
+        }
     }
 }

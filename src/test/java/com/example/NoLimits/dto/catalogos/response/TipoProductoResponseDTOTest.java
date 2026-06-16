@@ -193,5 +193,21 @@ class TipoProductoResponseDTOTest {
             assertTrue(resultado.contains("descripcion=Categoría general para clasificar productos"));
             assertTrue(resultado.contains("activo=true"));
         }
+
+        @Test
+        @DisplayName("equals retorna false cuando nombre es null vs valor")
+        void testEqualsNombreNullVsValor() {
+            TipoProductoResponseDTO dto1 = new TipoProductoResponseDTO();
+            TipoProductoResponseDTO dto2 = new TipoProductoResponseDTO();
+            dto2.setNombre("Película");
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("objetos vacíos son iguales entre sí")
+        void testVaciosIguales() {
+            assertEquals(new TipoProductoResponseDTO(), new TipoProductoResponseDTO());
+            assertEquals(new TipoProductoResponseDTO().hashCode(), new TipoProductoResponseDTO().hashCode());
+        }
     }
 }

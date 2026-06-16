@@ -176,14 +176,45 @@ class RolResponseDTOTest {
         @Test
         @DisplayName("equals retorna false cuando cambia descripción")
         void testEqualsDescripcionDistinta() {
-
             RolResponseDTO dto1 = new RolResponseDTO();
             dto1.setDescripcion("Rol por defecto");
-
             RolResponseDTO dto2 = new RolResponseDTO();
             dto2.setDescripcion("Rol administrador");
-
             assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        void objetosVaciosSonIguales() {
+            assertEquals(new RolResponseDTO(), new RolResponseDTO());
+            assertEquals(new RolResponseDTO().hashCode(), new RolResponseDTO().hashCode());
+        }
+
+        @Test
+        void nullVsValorNombre() {
+            RolResponseDTO d1 = new RolResponseDTO();
+            RolResponseDTO d2 = new RolResponseDTO(); d2.setNombre("CLIENTE");
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorDescripcion() {
+            RolResponseDTO d1 = new RolResponseDTO();
+            RolResponseDTO d2 = new RolResponseDTO(); d2.setDescripcion("Rol");
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorActivo() {
+            RolResponseDTO d1 = new RolResponseDTO();
+            RolResponseDTO d2 = new RolResponseDTO(); d2.setActivo(true);
+            assertNotEquals(d1, d2);
+        }
+
+        @Test
+        void nullVsValorId() {
+            RolResponseDTO d1 = new RolResponseDTO();
+            RolResponseDTO d2 = new RolResponseDTO(); d2.setId(1L);
+            assertNotEquals(d1, d2);
         }
     }
 }
