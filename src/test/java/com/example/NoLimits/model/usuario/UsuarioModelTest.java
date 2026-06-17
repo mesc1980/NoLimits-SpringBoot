@@ -10,6 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("UsuarioModel Tests")
@@ -21,39 +24,24 @@ class UsuarioModelTest {
 
         @Test
         void debeRetornarNombreCompleto() {
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setNombre("Juan");
             usuario.setApellidos("Pérez Soto");
-
-            assertEquals(
-                    "Juan Pérez Soto",
-                    usuario.getNombreCompleto()
-            );
+            assertEquals("Juan Pérez Soto", usuario.getNombreCompleto());
         }
 
         @Test
         void debeManejarNombreNull() {
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setApellidos("Pérez");
-
-            assertEquals(
-                    " Pérez",
-                    usuario.getNombreCompleto()
-            );
+            assertEquals(" Pérez", usuario.getNombreCompleto());
         }
 
         @Test
         void debeManejarApellidosNull() {
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setNombre("Juan");
-
-            assertEquals(
-                    "Juan ",
-                    usuario.getNombreCompleto()
-            );
+            assertEquals("Juan ", usuario.getNombreCompleto());
         }
     }
 
@@ -63,21 +51,16 @@ class UsuarioModelTest {
 
         @Test
         void debeRetornarDireccionId() {
-
             DireccionModel direccion = new DireccionModel();
             direccion.setId(10L);
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setDireccion(direccion);
-
             assertEquals(10L, usuario.getDireccionId());
         }
 
         @Test
         void direccionNullRetornaNull() {
-
             UsuarioModel usuario = new UsuarioModel();
-
             assertNull(usuario.getDireccionId());
         }
     }
@@ -88,29 +71,22 @@ class UsuarioModelTest {
 
         @Test
         void debeRetornarDatosComuna() {
-
             ComunaModel comuna = new ComunaModel();
             comuna.setId(13101L);
             comuna.setNombre("Santiago");
-
             DireccionModel direccion = new DireccionModel();
             direccion.setComuna(comuna);
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setDireccion(direccion);
-
             assertEquals(13101L, usuario.getComunaId());
             assertEquals("Santiago", usuario.getComunaNombre());
         }
 
         @Test
         void comunaNullRetornaNull() {
-
             DireccionModel direccion = new DireccionModel();
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setDireccion(direccion);
-
             assertNull(usuario.getComunaId());
             assertNull(usuario.getComunaNombre());
         }
@@ -122,35 +98,26 @@ class UsuarioModelTest {
 
         @Test
         void debeRetornarDatosRegion() {
-
             RegionModel region = new RegionModel();
             region.setId(13L);
             region.setNombre("Metropolitana");
-
             ComunaModel comuna = new ComunaModel();
             comuna.setRegion(region);
-
             DireccionModel direccion = new DireccionModel();
             direccion.setComuna(comuna);
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setDireccion(direccion);
-
             assertEquals(13L, usuario.getRegionId());
             assertEquals("Metropolitana", usuario.getRegionNombre());
         }
 
         @Test
         void regionNullRetornaNull() {
-
             ComunaModel comuna = new ComunaModel();
-
             DireccionModel direccion = new DireccionModel();
             direccion.setComuna(comuna);
-
             UsuarioModel usuario = new UsuarioModel();
             usuario.setDireccion(direccion);
-
             assertNull(usuario.getRegionId());
             assertNull(usuario.getRegionNombre());
         }
@@ -162,11 +129,8 @@ class UsuarioModelTest {
 
         @Test
         void debeAsignarPropiedades() {
-
             RolModel rol = new RolModel();
-
             UsuarioModel usuario = new UsuarioModel();
-
             usuario.setId(1L);
             usuario.setNombre("Juan");
             usuario.setApellidos("Pérez");
@@ -175,7 +139,6 @@ class UsuarioModelTest {
             usuario.setFotoPerfil("foto.jpg");
             usuario.setPassword("12345678");
             usuario.setRol(rol);
-
             assertEquals(1L, usuario.getId());
             assertEquals("Juan", usuario.getNombre());
             assertEquals("Pérez", usuario.getApellidos());
@@ -185,6 +148,51 @@ class UsuarioModelTest {
             assertEquals("12345678", usuario.getPassword());
             assertEquals(rol, usuario.getRol());
         }
+
+        @Test
+        @DisplayName("setVentas y getVentas funcionan")
+        void setVentasGetVentas() {
+            UsuarioModel usuario = new UsuarioModel();
+            usuario.setVentas(new ArrayList<>());
+            assertNotNull(usuario.getVentas());
+            assertTrue(usuario.getVentas().isEmpty());
+        }
+
+        @Test
+        @DisplayName("ventas null por defecto")
+        void ventasNullPorDefecto() {
+            UsuarioModel usuario = new UsuarioModel();
+            assertNull(usuario.getVentas());
+        }
+    }
+
+    @Nested
+    @DisplayName("Constructor AllArgs")
+    class ConstructorAllArgs {
+
+        @Test
+        @DisplayName("constructor con todos los parámetros funciona")
+        void testAllArgsConstructor() {
+            RolModel rol = new RolModel();
+            DireccionModel direccion = new DireccionModel();
+
+            UsuarioModel usuario = new UsuarioModel(
+                    1L, "Juan", "Pérez", "juan@test.cl",
+                    987654321L, "foto.jpg", "clave123",
+                    rol, direccion, null
+            );
+
+            assertEquals(1L, usuario.getId());
+            assertEquals("Juan", usuario.getNombre());
+            assertEquals("Pérez", usuario.getApellidos());
+            assertEquals("juan@test.cl", usuario.getCorreo());
+            assertEquals(987654321L, usuario.getTelefono());
+            assertEquals("foto.jpg", usuario.getFotoPerfil());
+            assertEquals("clave123", usuario.getPassword());
+            assertEquals(rol, usuario.getRol());
+            assertEquals(direccion, usuario.getDireccion());
+            assertNull(usuario.getVentas());
+        }
     }
 
     @Nested
@@ -193,23 +201,71 @@ class UsuarioModelTest {
 
         @Test
         void objetosConMismoContenidoSonIguales() {
-
-            UsuarioModel u1 = new UsuarioModel();
-            u1.setId(1L);
-
-            UsuarioModel u2 = new UsuarioModel();
-            u2.setId(1L);
-
+            UsuarioModel u1 = new UsuarioModel(); u1.setId(1L);
+            UsuarioModel u2 = new UsuarioModel(); u2.setId(1L);
             assertEquals(u1, u2);
             assertEquals(u1.hashCode(), u2.hashCode());
         }
 
         @Test
         void toStringNoDebeSerNull() {
+            assertNotNull(new UsuarioModel().toString());
+        }
 
-            UsuarioModel usuario = new UsuarioModel();
+        @Test
+        void equalsMismaInstancia() {
+            UsuarioModel u = new UsuarioModel(); u.setId(1L);
+            assertEquals(u, u);
+        }
 
-            assertNotNull(usuario.toString());
+        @Test
+        void equalsConNull() {
+            assertNotEquals(null, new UsuarioModel());
+        }
+
+        @Test
+        void equalsConOtraClase() {
+            assertNotEquals("texto", new UsuarioModel());
+        }
+
+        @Test
+        void objetosVaciosSonIguales() {
+            assertEquals(new UsuarioModel(), new UsuarioModel());
+        }
+
+        @Test
+        void equalsIdDistinto() {
+            UsuarioModel u1 = new UsuarioModel(); u1.setId(1L);
+            UsuarioModel u2 = new UsuarioModel(); u2.setId(2L);
+            assertNotEquals(u1, u2);
+        }
+
+        @Test
+        void nullVsValorNombre() {
+            UsuarioModel u1 = new UsuarioModel();
+            UsuarioModel u2 = new UsuarioModel(); u2.setNombre("Juan");
+            assertNotEquals(u1, u2);
+        }
+
+        @Test
+        void nullVsValorCorreo() {
+            UsuarioModel u1 = new UsuarioModel();
+            UsuarioModel u2 = new UsuarioModel(); u2.setCorreo("juan@test.cl");
+            assertNotEquals(u1, u2);
+        }
+
+        @Test
+        void nullVsValorApellidos() {
+            UsuarioModel u1 = new UsuarioModel();
+            UsuarioModel u2 = new UsuarioModel(); u2.setApellidos("Pérez");
+            assertNotEquals(u1, u2);
+        }
+
+        @Test
+        void nullVsValorTelefono() {
+            UsuarioModel u1 = new UsuarioModel();
+            UsuarioModel u2 = new UsuarioModel(); u2.setTelefono(123456789L);
+            assertNotEquals(u1, u2);
         }
     }
 
@@ -252,8 +308,7 @@ class UsuarioModelTest {
         @Test
         @DisplayName("sin rol → getRol() es null")
         void sinRol_esNull() {
-            UsuarioModel u = new UsuarioModel();
-            assertNull(u.getRol());
+            assertNull(new UsuarioModel().getRol());
         }
 
         @Test
@@ -269,27 +324,6 @@ class UsuarioModelTest {
     }
 
     @Nested
-    @DisplayName("getters adicionales")
-    class GettersAdicionales {
-
-        @Test
-        @DisplayName("setTelefono / getTelefono")
-        void telefonoGetterSetter() {
-            UsuarioModel u = new UsuarioModel();
-            u.setTelefono(987654321L);
-            assertEquals(987654321L, u.getTelefono());
-        }
-
-        @Test
-        @DisplayName("setFotoPerfil / getFotoPerfil")
-        void fotoPerfilGetterSetter() {
-            UsuarioModel u = new UsuarioModel();
-            u.setFotoPerfil("https://foto.jpg");
-            assertEquals("https://foto.jpg", u.getFotoPerfil());
-        }
-    }
-
-    @Nested
     @DisplayName("getComunaId / getRegionId — cadena de nulls")
     class CadenaNullsUbicacion {
 
@@ -298,26 +332,21 @@ class UsuarioModelTest {
         void direccionNoNull_comunaNull_getComunaIdEsNull() {
             DireccionModel direccion = new DireccionModel();
             direccion.setComuna(null);
-
             UsuarioModel u = new UsuarioModel();
             u.setDireccion(direccion);
-
             assertNull(u.getComunaId());
             assertNull(u.getComunaNombre());
         }
 
         @Test
-        @DisplayName("direccion no null, comuna no null, region null → getRegionId retorna null")
+        @DisplayName("comuna no null, region null → getRegionId retorna null")
         void comunaNoNull_regionNull_getRegionIdEsNull() {
             ComunaModel comuna = new ComunaModel();
             comuna.setRegion(null);
-
             DireccionModel direccion = new DireccionModel();
             direccion.setComuna(comuna);
-
             UsuarioModel u = new UsuarioModel();
             u.setDireccion(direccion);
-
             assertNull(u.getRegionId());
             assertNull(u.getRegionNombre());
         }
@@ -327,7 +356,6 @@ class UsuarioModelTest {
         void direccionNull_todasLasPropiedadesUbicacionNull() {
             UsuarioModel u = new UsuarioModel();
             u.setDireccion(null);
-
             assertNull(u.getDireccionId());
             assertNull(u.getComunaId());
             assertNull(u.getComunaNombre());

@@ -17,18 +17,11 @@ class RegionRequestDTOTest {
         @Test
         @DisplayName("Asigna y obtiene nombre correctamente")
         void testGettersAndSetters() {
-
-            // Arrange
             RegionRequestDTO dto = new RegionRequestDTO();
 
-            // Act
             dto.setNombre("Región Metropolitana");
 
-            // Assert
-            assertEquals(
-                    "Región Metropolitana",
-                    dto.getNombre()
-            );
+            assertEquals("Región Metropolitana", dto.getNombre());
         }
     }
 
@@ -39,67 +32,105 @@ class RegionRequestDTOTest {
         @Test
         @DisplayName("Objetos iguales")
         void testEqualsAndHashCode() {
+            RegionRequestDTO dto1 = crearDTO();
+            RegionRequestDTO dto2 = crearDTO();
 
-            // Arrange
-            RegionRequestDTO dto1 = new RegionRequestDTO();
-            dto1.setNombre("Región Metropolitana");
-
-            RegionRequestDTO dto2 = new RegionRequestDTO();
-            dto2.setNombre("Región Metropolitana");
-
-            // Assert
             assertEquals(dto1, dto2);
-            assertEquals(
-                    dto1.hashCode(),
-                    dto2.hashCode()
-            );
+            assertEquals(dto1.hashCode(), dto2.hashCode());
         }
 
         @Test
         @DisplayName("Objetos diferentes")
         void testNotEquals() {
+            RegionRequestDTO dto1 = crearDTO();
 
-            // Arrange
-            RegionRequestDTO dto1 = new RegionRequestDTO();
-            dto1.setNombre("Región Metropolitana");
-
-            RegionRequestDTO dto2 = new RegionRequestDTO();
+            RegionRequestDTO dto2 = crearDTO();
             dto2.setNombre("Valparaíso");
 
-            // Assert
             assertNotEquals(dto1, dto2);
         }
 
         @Test
         @DisplayName("Comparación con null")
         void testNotEqualsNull() {
-
-            // Arrange
             RegionRequestDTO dto = new RegionRequestDTO();
 
-            // Assert
             assertNotEquals(null, dto);
         }
 
         @Test
         @DisplayName("Comparación consigo mismo")
         void testEqualsSameInstance() {
-
-            // Arrange
             RegionRequestDTO dto = new RegionRequestDTO();
 
-            // Assert
             assertEquals(dto, dto);
         }
 
         @Test
         @DisplayName("Comparación con otra clase")
-        void testNotEqualsOtraClase() {
-
-            RegionRequestDTO dto = new RegionRequestDTO();
-            dto.setNombre("Región Metropolitana");
+        void testNotEqualsDifferentClass() {
+            RegionRequestDTO dto = crearDTO();
 
             assertNotEquals(dto, "texto");
+        }
+
+        @Test
+        @DisplayName("Objetos vacíos son iguales")
+        void objetosVaciosSonIguales() {
+            RegionRequestDTO dto1 = new RegionRequestDTO();
+            RegionRequestDTO dto2 = new RegionRequestDTO();
+
+            assertEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Objetos vacíos tienen mismo hashCode")
+        void objetosVaciosMismoHashCode() {
+            RegionRequestDTO dto1 = new RegionRequestDTO();
+            RegionRequestDTO dto2 = new RegionRequestDTO();
+
+            assertEquals(dto1.hashCode(), dto2.hashCode());
+        }
+
+        @Test
+        @DisplayName("Null vs valor nombre")
+        void nullVsValorNombre() {
+            RegionRequestDTO dto1 = new RegionRequestDTO();
+
+            RegionRequestDTO dto2 = new RegionRequestDTO();
+            dto2.setNombre("Región Metropolitana");
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Valor vs null nombre")
+        void valorVsNullNombre() {
+            RegionRequestDTO dto1 = new RegionRequestDTO();
+            dto1.setNombre("Región Metropolitana");
+
+            RegionRequestDTO dto2 = new RegionRequestDTO();
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("HashCode objeto vacío")
+        void hashCodeObjetoVacio() {
+            RegionRequestDTO dto = new RegionRequestDTO();
+
+            assertNotEquals(0, dto.hashCode());
+        }
+
+        @Test
+        @DisplayName("HashCode cambia cuando cambia nombre")
+        void hashCodeDistintoNombre() {
+            RegionRequestDTO dto1 = crearDTO();
+
+            RegionRequestDTO dto2 = crearDTO();
+            dto2.setNombre("Valparaíso");
+
+            assertNotEquals(dto1.hashCode(), dto2.hashCode());
         }
     }
 
@@ -110,19 +141,18 @@ class RegionRequestDTOTest {
         @Test
         @DisplayName("Genera representación textual")
         void testToString() {
+            RegionRequestDTO dto = crearDTO();
 
-            // Arrange
-            RegionRequestDTO dto = new RegionRequestDTO();
-            dto.setNombre("Región Metropolitana");
-
-            // Act
             String result = dto.toString();
 
-            // Assert
             assertNotNull(result);
-            assertTrue(
-                    result.contains("Región Metropolitana")
-            );
+            assertTrue(result.contains("Región Metropolitana"));
         }
+    }
+
+    private RegionRequestDTO crearDTO() {
+        RegionRequestDTO dto = new RegionRequestDTO();
+        dto.setNombre("Región Metropolitana");
+        return dto;
     }
 }

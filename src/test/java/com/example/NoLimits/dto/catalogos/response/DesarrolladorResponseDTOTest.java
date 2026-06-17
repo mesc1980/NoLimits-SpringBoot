@@ -160,5 +160,21 @@ class DesarrolladorResponseDTOTest {
             assertTrue(resultado.contains("nombre=Insomniac Games"));
             assertTrue(resultado.contains("activo=true"));
         }
+
+        @Test
+        @DisplayName("equals retorna false cuando nombre es null vs valor")
+        void testEqualsNombreNullVsValor() {
+            DesarrolladorResponseDTO dto1 = new DesarrolladorResponseDTO();
+            DesarrolladorResponseDTO dto2 = new DesarrolladorResponseDTO();
+            dto2.setNombre("Insomniac Games");
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("objetos vacíos son iguales entre sí")
+        void testVaciosIguales() {
+            assertEquals(new DesarrolladorResponseDTO(), new DesarrolladorResponseDTO());
+            assertEquals(new DesarrolladorResponseDTO().hashCode(), new DesarrolladorResponseDTO().hashCode());
+        }
     }
 }

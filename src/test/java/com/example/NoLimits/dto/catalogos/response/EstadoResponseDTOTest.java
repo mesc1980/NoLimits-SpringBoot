@@ -182,5 +182,22 @@ class EstadoResponseDTOTest {
             assertTrue(resultado.contains("descripcion=Producto disponible para su compra"));
             assertTrue(resultado.contains("activo=true"));
         }
+
+        @Test
+        @DisplayName("equals retorna false cuando nombre es null vs valor")
+        void testEqualsNombreNullVsValor() {
+            EstadoResponseDTO dto1 = new EstadoResponseDTO();
+            EstadoResponseDTO dto2 = new EstadoResponseDTO();
+            dto2.setNombre("Activo");
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("objetos vacíos son iguales entre sí")
+        void testVaciosIguales() {
+            assertEquals(new EstadoResponseDTO(), new EstadoResponseDTO());
+            assertEquals(new EstadoResponseDTO().hashCode(), new EstadoResponseDTO().hashCode());
+        }
     }
+
 }
