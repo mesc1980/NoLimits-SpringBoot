@@ -237,5 +237,55 @@ class UsuarioUpdateDTOTest {
 
             assertNotEquals(dto1.hashCode(), dto2.hashCode());
         }
+
+        @Test
+        @DisplayName("genera equals y hashCode correctamente con todos los campos")
+        void testEqualsYHashCodeConTodosLosCampos() {
+
+            UsuarioUpdateDTO dto1 = crearDTOCompleto();
+            UsuarioUpdateDTO dto2 = crearDTOCompleto();
+
+            assertEquals(dto1, dto2);
+            assertEquals(dto1.hashCode(), dto2.hashCode());
+        }
+
+        @Test
+        @DisplayName("toString contiene campos principales")
+        void testToStringContieneCamposPrincipales() {
+
+            UsuarioUpdateDTO dto = crearDTOCompleto();
+
+            String resultado = dto.toString();
+
+            assertAll(
+                    () -> assertNotNull(resultado),
+                    () -> assertTrue(resultado.contains("Juan")),
+                    () -> assertTrue(resultado.contains("Pérez Soto")),
+                    () -> assertTrue(resultado.contains("juan.perez@example.com")),
+                    () -> assertTrue(resultado.contains("987654321")),
+                    () -> assertTrue(resultado.contains("https://example.com/foto.jpg")),
+                    () -> assertTrue(resultado.contains("2"))
+            );
+        }
+    }
+
+    private UsuarioUpdateDTO crearDTOCompleto() {
+
+        DireccionRequestDTO direccion = new DireccionRequestDTO();
+        direccion.setCalle("Av. Siempre Viva");
+        direccion.setNumero("742");
+        direccion.setComunaId(13101L);
+
+        UsuarioUpdateDTO dto = new UsuarioUpdateDTO();
+        dto.setNombre("Juan");
+        dto.setApellidos("Pérez Soto");
+        dto.setCorreo("juan.perez@example.com");
+        dto.setTelefono(987654321L);
+        dto.setPassword("NuevaPassword123");
+        dto.setFotoPerfil("https://example.com/foto.jpg");
+        dto.setRolId(2L);
+        dto.setDireccion(direccion);
+
+        return dto;
     }
 }

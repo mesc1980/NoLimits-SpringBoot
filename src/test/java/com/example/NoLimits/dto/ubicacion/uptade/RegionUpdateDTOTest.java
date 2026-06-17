@@ -87,6 +87,15 @@ class RegionUpdateDTOTest {
             // Assert
             assertEquals(dto, dto);
         }
+
+        @Test
+        @DisplayName("Comparación con otra clase")
+        void testNotEqualsOtraClase() {
+
+            RegionUpdateDTO dto = crearDTO();
+
+            assertNotEquals(dto, "texto");
+        }
     }
 
     @Nested

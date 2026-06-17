@@ -83,6 +83,27 @@ class ComunaUpdateDTOTest {
             // Assert
             assertEquals(dto, dto);
         }
+
+        @Test
+        @DisplayName("Objetos diferentes por regionId")
+        void testNotEqualsPorRegionId() {
+
+            ComunaUpdateDTO dto1 = crearDTO();
+            ComunaUpdateDTO dto2 = crearDTO();
+
+            dto2.setRegionId(99L);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Comparación con otra clase")
+        void testNotEqualsOtraClase() {
+
+            ComunaUpdateDTO dto = crearDTO();
+
+            assertNotEquals(dto, "texto");
+        }
     }
 
     @Nested

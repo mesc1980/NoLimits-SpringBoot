@@ -91,6 +91,16 @@ class RegionRequestDTOTest {
             // Assert
             assertEquals(dto, dto);
         }
+
+        @Test
+        @DisplayName("Comparación con otra clase")
+        void testNotEqualsOtraClase() {
+
+            RegionRequestDTO dto = new RegionRequestDTO();
+            dto.setNombre("Región Metropolitana");
+
+            assertNotEquals(dto, "texto");
+        }
     }
 
     @Nested

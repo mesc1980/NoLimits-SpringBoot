@@ -244,5 +244,45 @@ class VentaUpdateDTOTest {
             assertTrue(resultado.contains("3"));
         }
 
+        @Test
+        @DisplayName("genera equals y hashCode correctamente con todos los campos")
+        void testEqualsYHashCodeConTodosLosCampos() {
+
+            VentaUpdateDTO dto1 = crearDTOCompleto();
+            VentaUpdateDTO dto2 = crearDTOCompleto();
+
+            assertEquals(dto1, dto2);
+            assertEquals(dto1.hashCode(), dto2.hashCode());
+        }
+
+        @Test
+        @DisplayName("toString contiene todos los campos principales")
+        void testToStringContieneTodosLosCamposPrincipales() {
+
+            VentaUpdateDTO dto = crearDTOCompleto();
+
+            String resultado = dto.toString();
+
+            assertAll(
+                    () -> assertNotNull(resultado),
+                    () -> assertTrue(resultado.contains("2025-07-06")),
+                    () -> assertTrue(resultado.contains("14:30")),
+                    () -> assertTrue(resultado.contains("1")),
+                    () -> assertTrue(resultado.contains("2")),
+                    () -> assertTrue(resultado.contains("3"))
+            );
+        }
+    }
+
+    private VentaUpdateDTO crearDTOCompleto() {
+
+        VentaUpdateDTO dto = new VentaUpdateDTO();
+        dto.setFechaCompra(LocalDate.of(2025, 7, 6));
+        dto.setHoraCompra(LocalTime.of(14, 30));
+        dto.setMetodoPagoId(1L);
+        dto.setMetodoEnvioId(2L);
+        dto.setEstadoId(3L);
+
+        return dto;
     }
 }

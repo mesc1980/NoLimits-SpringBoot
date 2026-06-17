@@ -91,6 +91,32 @@ class ComunaRequestDTOTest {
             // Assert
             assertEquals(dto, dto);
         }
+
+        @Test
+        @DisplayName("Objetos diferentes por regionId")
+        void testNotEqualsPorRegionId() {
+
+            ComunaRequestDTO dto1 = new ComunaRequestDTO();
+            dto1.setNombre("Santiago");
+            dto1.setRegionId(13L);
+
+            ComunaRequestDTO dto2 = new ComunaRequestDTO();
+            dto2.setNombre("Santiago");
+            dto2.setRegionId(99L);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Comparación con otra clase")
+        void testNotEqualsOtraClase() {
+
+            ComunaRequestDTO dto = new ComunaRequestDTO();
+            dto.setNombre("Santiago");
+            dto.setRegionId(13L);
+
+            assertNotEquals(dto, "texto");
+        }
     }
 
     @Nested

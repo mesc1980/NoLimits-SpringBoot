@@ -93,6 +93,87 @@ class DireccionRequestDTOTest {
             // Assert
             assertEquals(dto, dto);
         }
+
+        @Test
+        @DisplayName("Objetos diferentes por calle")
+        void testNotEqualsPorCalle() {
+
+            DireccionRequestDTO dto1 = crearDTO();
+            DireccionRequestDTO dto2 = crearDTO();
+
+            dto2.setCalle("Av. Providencia");
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Objetos diferentes por complemento")
+        void testNotEqualsPorComplemento() {
+
+            DireccionRequestDTO dto1 = crearDTO();
+            DireccionRequestDTO dto2 = crearDTO();
+
+            dto2.setComplemento("Casa B");
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Objetos diferentes por codigoPostal")
+        void testNotEqualsPorCodigoPostal() {
+
+            DireccionRequestDTO dto1 = crearDTO();
+            DireccionRequestDTO dto2 = crearDTO();
+
+            dto2.setCodigoPostal("7500000");
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Objetos diferentes por comunaId")
+        void testNotEqualsPorComunaId() {
+
+            DireccionRequestDTO dto1 = crearDTO();
+            DireccionRequestDTO dto2 = crearDTO();
+
+            dto2.setComunaId(13114L);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Objetos diferentes por usuarioId")
+        void testNotEqualsPorUsuarioId() {
+
+            DireccionRequestDTO dto1 = crearDTO();
+            DireccionRequestDTO dto2 = crearDTO();
+
+            dto2.setUsuarioId(99L);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Objetos diferentes por activo")
+        void testNotEqualsPorActivo() {
+
+            DireccionRequestDTO dto1 = crearDTO();
+            DireccionRequestDTO dto2 = crearDTO();
+
+            dto2.setActivo(false);
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
+        @DisplayName("Comparación con otra clase")
+        void testNotEqualsOtraClase() {
+
+            DireccionRequestDTO dto = crearDTO();
+
+            assertNotEquals(dto, "texto");
+        }
     }
 
     @Nested
