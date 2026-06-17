@@ -17,15 +17,11 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Asigna y obtiene valores correctamente")
         void testGettersAndSetters() {
-
-            // Arrange
             ComunaRequestDTO dto = new ComunaRequestDTO();
 
-            // Act
             dto.setNombre("Santiago");
             dto.setRegionId(13L);
 
-            // Assert
             assertEquals("Santiago", dto.getNombre());
             assertEquals(13L, dto.getRegionId());
         }
@@ -38,17 +34,9 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Objetos iguales")
         void testEqualsAndHashCode() {
+            ComunaRequestDTO dto1 = crearDTO();
+            ComunaRequestDTO dto2 = crearDTO();
 
-            // Arrange
-            ComunaRequestDTO dto1 = new ComunaRequestDTO();
-            dto1.setNombre("Santiago");
-            dto1.setRegionId(13L);
-
-            ComunaRequestDTO dto2 = new ComunaRequestDTO();
-            dto2.setNombre("Santiago");
-            dto2.setRegionId(13L);
-
-            // Assert
             assertEquals(dto1, dto2);
             assertEquals(dto1.hashCode(), dto2.hashCode());
         }
@@ -56,47 +44,34 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Objetos diferentes")
         void testNotEquals() {
+            ComunaRequestDTO dto1 = crearDTO();
 
-            // Arrange
-            ComunaRequestDTO dto1 = new ComunaRequestDTO();
-            dto1.setNombre("Santiago");
-            dto1.setRegionId(13L);
-
-            ComunaRequestDTO dto2 = new ComunaRequestDTO();
+            ComunaRequestDTO dto2 = crearDTO();
             dto2.setNombre("Providencia");
-            dto2.setRegionId(14L);
 
-            // Assert
             assertNotEquals(dto1, dto2);
         }
 
         @Test
         @DisplayName("Comparación con null")
         void testNotEqualsNull() {
-
-            // Arrange
             ComunaRequestDTO dto = new ComunaRequestDTO();
 
-            // Assert
             assertNotEquals(null, dto);
         }
 
         @Test
         @DisplayName("Comparación consigo mismo")
         void testEqualsSameInstance() {
-
-            // Arrange
             ComunaRequestDTO dto = new ComunaRequestDTO();
 
-            // Assert
             assertEquals(dto, dto);
         }
 
         @Test
         @DisplayName("Comparación con otra clase")
         void testNotEqualsDifferentClass() {
-
-            ComunaRequestDTO dto = new ComunaRequestDTO();
+            ComunaRequestDTO dto = crearDTO();
 
             assertNotEquals(dto, "texto");
         }
@@ -104,7 +79,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Objetos vacíos son iguales")
         void objetosVaciosSonIguales() {
-
             ComunaRequestDTO dto1 = new ComunaRequestDTO();
             ComunaRequestDTO dto2 = new ComunaRequestDTO();
 
@@ -114,7 +88,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Objetos vacíos tienen mismo hashCode")
         void objetosVaciosHashCode() {
-
             ComunaRequestDTO dto1 = new ComunaRequestDTO();
             ComunaRequestDTO dto2 = new ComunaRequestDTO();
 
@@ -124,7 +97,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Null vs valor nombre")
         void nullVsValorNombre() {
-
             ComunaRequestDTO dto1 = new ComunaRequestDTO();
 
             ComunaRequestDTO dto2 = new ComunaRequestDTO();
@@ -136,7 +108,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Valor vs null nombre")
         void valorVsNullNombre() {
-
             ComunaRequestDTO dto1 = new ComunaRequestDTO();
             dto1.setNombre("Santiago");
 
@@ -148,7 +119,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Null vs valor regionId")
         void nullVsValorRegionId() {
-
             ComunaRequestDTO dto1 = new ComunaRequestDTO();
 
             ComunaRequestDTO dto2 = new ComunaRequestDTO();
@@ -160,7 +130,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Valor vs null regionId")
         void valorVsNullRegionId() {
-
             ComunaRequestDTO dto1 = new ComunaRequestDTO();
             dto1.setRegionId(13L);
 
@@ -172,14 +141,10 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Diferente nombre")
         void diferenteNombre() {
+            ComunaRequestDTO dto1 = crearDTO();
 
-            ComunaRequestDTO dto1 = new ComunaRequestDTO();
-            dto1.setNombre("Santiago");
-            dto1.setRegionId(13L);
-
-            ComunaRequestDTO dto2 = new ComunaRequestDTO();
+            ComunaRequestDTO dto2 = crearDTO();
             dto2.setNombre("Providencia");
-            dto2.setRegionId(13L);
 
             assertNotEquals(dto1, dto2);
         }
@@ -187,14 +152,10 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Diferente regionId")
         void diferenteRegionId() {
+            ComunaRequestDTO dto1 = crearDTO();
 
-            ComunaRequestDTO dto1 = new ComunaRequestDTO();
-            dto1.setNombre("Santiago");
-            dto1.setRegionId(13L);
-
-            ComunaRequestDTO dto2 = new ComunaRequestDTO();
-            dto2.setNombre("Santiago");
-            dto2.setRegionId(14L);
+            ComunaRequestDTO dto2 = crearDTO();
+            dto2.setRegionId(99L);
 
             assertNotEquals(dto1, dto2);
         }
@@ -202,7 +163,6 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("HashCode objeto vacío")
         void hashCodeObjetoVacio() {
-
             ComunaRequestDTO dto = new ComunaRequestDTO();
 
             assertNotEquals(0, dto.hashCode());
@@ -216,19 +176,20 @@ class ComunaRequestDTOTest {
         @Test
         @DisplayName("Genera representación de texto")
         void testToString() {
+            ComunaRequestDTO dto = crearDTO();
 
-            // Arrange
-            ComunaRequestDTO dto = new ComunaRequestDTO();
-            dto.setNombre("Santiago");
-            dto.setRegionId(13L);
-
-            // Act
             String result = dto.toString();
 
-            // Assert
             assertNotNull(result);
             assertTrue(result.contains("Santiago"));
             assertTrue(result.contains("13"));
         }
+    }
+
+    private ComunaRequestDTO crearDTO() {
+        ComunaRequestDTO dto = new ComunaRequestDTO();
+        dto.setNombre("Santiago");
+        dto.setRegionId(13L);
+        return dto;
     }
 }

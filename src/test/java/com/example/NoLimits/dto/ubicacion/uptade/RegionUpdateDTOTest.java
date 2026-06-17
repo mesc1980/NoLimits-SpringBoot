@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegionUpdateDTOTest {
 
     private RegionUpdateDTO crearDTO() {
-
         RegionUpdateDTO dto = new RegionUpdateDTO();
         dto.setNombre("Región de Valparaíso");
 
@@ -25,18 +24,9 @@ class RegionUpdateDTOTest {
         @Test
         @DisplayName("Asigna y obtiene nombre correctamente")
         void testGettersAndSetters() {
+            RegionUpdateDTO dto = crearDTO();
 
-            // Arrange
-            RegionUpdateDTO dto = new RegionUpdateDTO();
-
-            // Act
-            dto.setNombre("Región de Valparaíso");
-
-            // Assert
-            assertEquals(
-                    "Región de Valparaíso",
-                    dto.getNombre()
-            );
+            assertEquals("Región de Valparaíso", dto.getNombre());
         }
     }
 
@@ -47,59 +37,43 @@ class RegionUpdateDTOTest {
         @Test
         @DisplayName("Objetos iguales")
         void testEqualsAndHashCode() {
-
-            // Arrange
             RegionUpdateDTO dto1 = crearDTO();
             RegionUpdateDTO dto2 = crearDTO();
 
-            // Assert
             assertEquals(dto1, dto2);
-            assertEquals(
-                    dto1.hashCode(),
-                    dto2.hashCode()
-            );
+            assertEquals(dto1.hashCode(), dto2.hashCode());
         }
 
         @Test
         @DisplayName("Objetos diferentes")
         void testNotEquals() {
-
-            // Arrange
             RegionUpdateDTO dto1 = crearDTO();
 
             RegionUpdateDTO dto2 = crearDTO();
             dto2.setNombre("Región Metropolitana");
 
-            // Assert
             assertNotEquals(dto1, dto2);
         }
 
         @Test
         @DisplayName("Comparación con null")
         void testNotEqualsNull() {
-
-            // Arrange
             RegionUpdateDTO dto = crearDTO();
 
-            // Assert
             assertNotEquals(null, dto);
         }
 
         @Test
         @DisplayName("Comparación consigo mismo")
         void testEqualsSameInstance() {
-
-            // Arrange
             RegionUpdateDTO dto = crearDTO();
 
-            // Assert
             assertEquals(dto, dto);
         }
 
         @Test
         @DisplayName("Comparación con otra clase retorna false")
         void testEqualsOtraClase() {
-
             RegionUpdateDTO dto = crearDTO();
 
             assertNotEquals("texto", dto);
@@ -108,7 +82,6 @@ class RegionUpdateDTOTest {
         @Test
         @DisplayName("Objetos vacíos son iguales")
         void testObjetosVaciosIguales() {
-
             RegionUpdateDTO dto1 = new RegionUpdateDTO();
             RegionUpdateDTO dto2 = new RegionUpdateDTO();
 
@@ -119,7 +92,6 @@ class RegionUpdateDTOTest {
         @Test
         @DisplayName("Null versus valor en nombre")
         void testNullVsValorNombre() {
-
             RegionUpdateDTO dto1 = new RegionUpdateDTO();
 
             RegionUpdateDTO dto2 = new RegionUpdateDTO();
@@ -129,18 +101,24 @@ class RegionUpdateDTOTest {
         }
 
         @Test
+        @DisplayName("Valor versus null en nombre")
+        void testValorVsNullNombre() {
+            RegionUpdateDTO dto1 = crearDTO();
+
+            RegionUpdateDTO dto2 = new RegionUpdateDTO();
+
+            assertNotEquals(dto1, dto2);
+        }
+
+        @Test
         @DisplayName("HashCode cambia cuando cambia nombre")
         void testHashCodeDistintoNombre() {
-
             RegionUpdateDTO dto1 = crearDTO();
 
             RegionUpdateDTO dto2 = crearDTO();
             dto2.setNombre("Región Metropolitana");
 
-            assertNotEquals(
-                    dto1.hashCode(),
-                    dto2.hashCode()
-            );
+            assertNotEquals(dto1.hashCode(), dto2.hashCode());
         }
     }
 
@@ -151,24 +129,17 @@ class RegionUpdateDTOTest {
         @Test
         @DisplayName("Genera representación textual")
         void testToString() {
-
-            // Arrange
             RegionUpdateDTO dto = crearDTO();
 
-            // Act
             String result = dto.toString();
 
-            // Assert
             assertNotNull(result);
-            assertTrue(
-                    result.contains("Región de Valparaíso")
-            );
+            assertTrue(result.contains("Región de Valparaíso"));
         }
 
         @Test
         @DisplayName("ToString objeto vacío")
         void testToStringVacio() {
-
             String resultado = new RegionUpdateDTO().toString();
 
             assertNotNull(resultado);

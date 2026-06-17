@@ -127,6 +127,47 @@ class VentaModelTest {
             assertEquals(estado, venta.getEstado());
             assertEquals(detalles, venta.getDetalles());
         }
+
+        @Test
+        @DisplayName("debe asignar y obtener todas las propiedades")
+        void debeAsignarYObtenerTodasLasPropiedades() {
+
+            VentaModel venta = crearVentaBase();
+
+            assertAll(
+                    () -> assertEquals(1L, venta.getId()),
+                    () -> assertEquals(LocalDate.of(2025, 7, 6), venta.getFechaCompra()),
+                    () -> assertEquals(LocalTime.of(14, 30), venta.getHoraCompra()),
+                    () -> assertNotNull(venta.getUsuarioModel()),
+                    () -> assertNotNull(venta.getMetodoPagoModel()),
+                    () -> assertNotNull(venta.getMetodoEnvioModel()),
+                    () -> assertNotNull(venta.getEstado()),
+                    () -> assertNotNull(venta.getDetalles())
+            );
+        }
+    }
+
+    @Nested
+    @DisplayName("Constructor vacío")
+    class ConstructorVacio {
+
+        @Test
+        @DisplayName("debe crear venta con campos nulos")
+        void debeCrearVentaConCamposNulos() {
+
+            VentaModel venta = new VentaModel();
+
+            assertAll(
+                    () -> assertNull(venta.getId()),
+                    () -> assertNull(venta.getFechaCompra()),
+                    () -> assertNull(venta.getHoraCompra()),
+                    () -> assertNull(venta.getUsuarioModel()),
+                    () -> assertNull(venta.getMetodoPagoModel()),
+                    () -> assertNull(venta.getMetodoEnvioModel()),
+                    () -> assertNull(venta.getEstado()),
+                    () -> assertNull(venta.getDetalles())
+            );
+        }
     }
 
     @Nested
@@ -195,6 +236,48 @@ class VentaModelTest {
 
             assertEquals(v1, v2);
             assertEquals(v1.hashCode(), v2.hashCode());
+        }
+
+        @Test
+        @DisplayName("Objetos vacíos son iguales")
+        void objetosVaciosSonIguales() {
+
+            VentaModel v1 = new VentaModel();
+            VentaModel v2 = new VentaModel();
+
+            assertEquals(v1, v2);
+        }
+
+        @Test
+        @DisplayName("HashCode de objetos vacíos")
+        void hashCodeObjetosVacios() {
+
+            VentaModel v1 = new VentaModel();
+            VentaModel v2 = new VentaModel();
+
+            assertEquals(v1.hashCode(), v2.hashCode());
+        }
+
+        @Test
+        @DisplayName("Equals cuando un campo es null y otro tiene valor")
+        void equalsCampoNullVsValor() {
+
+            VentaModel v1 = crearVentaBase();
+
+            VentaModel v2 = crearVentaBase();
+            v2.setEstado(null);
+
+            assertNotEquals(v1, v2);
+        }
+
+        @Test
+        @DisplayName("Equals cuando ambos tienen campos null")
+        void equalsCamposNull() {
+
+            VentaModel v1 = new VentaModel();
+            VentaModel v2 = new VentaModel();
+
+            assertEquals(v1, v2);
         }
 
         @Test
@@ -349,6 +432,35 @@ class VentaModelTest {
 
             assertNotNull(resultado);
             assertTrue(resultado.contains("VentaModel"));
+        }
+
+        @Test
+        @DisplayName("ToString contiene campos principales")
+        void toStringContieneCamposPrincipales() {
+
+            VentaModel venta = crearVentaBase();
+
+            String resultado = venta.toString();
+
+            assertAll(
+                    () -> assertNotNull(resultado),
+                    () -> assertTrue(resultado.contains("VentaModel")),
+                    () -> assertTrue(resultado.contains("id=1")),
+                    () -> assertTrue(resultado.contains("fechaCompra=2025-07-06")),
+                    () -> assertTrue(resultado.contains("horaCompra=14:30"))
+            );
+        }
+
+        @Test
+        @DisplayName("HashCode cambia cuando cambia el id")
+        void hashCodeCambiaCuandoCambiaId() {
+
+            VentaModel v1 = crearVentaBase();
+
+            VentaModel v2 = crearVentaBase();
+            v2.setId(99L);
+
+            assertNotEquals(v1.hashCode(), v2.hashCode());
         }
     }
     
