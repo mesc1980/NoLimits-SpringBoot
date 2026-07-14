@@ -9,6 +9,20 @@
 ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
+## 📑 Contenido
+
+- 🚀 Descripción
+- 🤝 Proyecto colaborativo
+- 👥 Equipo de desarrollo
+- 👩‍💻 Mi participación
+- 🛠 Tecnologías utilizadas
+- ✨ Funcionalidades principales
+- 🏗 Arquitectura
+- 🚀 Instalación
+- 🧪 Pruebas
+- 🌱 Aprendizajes
+- 🙏 Agradecimientos
+
 Backend del proyecto **NoLimits**, desarrollado de forma colaborativa como parte del proyecto de titulación de la carrera **Analista Programador** en **Duoc UC**.
 
 NoLimits es una plataforma web orientada a centralizar información relacionada con videojuegos, películas y series. El backend fue desarrollado utilizando **Spring Boot**, implementando una arquitectura en capas, autenticación segura mediante JWT y una API REST para la comunicación con el frontend.
@@ -87,3 +101,43 @@ Entre ellas se encuentran:
 La siguiente imagen muestra la arquitectura general del backend de **NoLimits**, desarrollada con Spring Boot y organizada en una arquitectura en capas.
 
 ![Arquitectura del Backend](arquitectura-backend-nolimits.png)
+
+# 🚀 Instalación
+
+## Requisitos
+
+- Java 17
+- Maven
+- PostgreSQL
+
+## Clonar el repositorio
+
+```bash
+git clone https://github.com/mesc1980/NoLimits-SpringBoot.git
+```
+
+## Ejecutar
+
+```bash
+mvn spring-boot:run
+```
+
+# 🧪 Calidad del software
+
+Durante el desarrollo del proyecto se aplicaron distintas estrategias para asegurar la calidad del software.
+
+Entre ellas:
+
+- Pruebas unitarias con JUnit 5.
+- Pruebas utilizando Mockito.
+- Medición de cobertura mediante JaCoCo.
+- Validación de endpoints REST.
+- Documentación automática mediante Swagger.
+
+# 🙏 Agradecimientos
+
+Este proyecto fue posible gracias al trabajo colaborativo desarrollado durante el proceso de titulación.
+
+Quiero agradecer especialmente a mis compañeros de equipo por su compromiso, disposición para colaborar y por todos los aprendizajes compartidos durante el desarrollo de NoLimits.
+
+La experiencia reafirmó la importancia del trabajo en equipo, la comunicación y el desarrollo colaborativo de software.
