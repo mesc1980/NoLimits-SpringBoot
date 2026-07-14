@@ -111,14 +111,13 @@ La siguiente imagen muestra la arquitectura general del backend de **NoLimits**,
 
 ![Arquitectura del Backend](docs/images/arquitectura-backend-nolimits.png)
 
-![Página principal](docs/images/pagina-principal.png)
+![Página principal](docs/images/Paginaprincipal.png.png)
 
-![Gestión de productos](docs/images/gestion-productos.png)
+![Gestión de productos](docs/images/Gestiondeproductos.png.png)
 
-![Perfil](docs/images/perfil-usuario.png)
+![Perfil](docs/images/PerfildeUsuario.png.png)
 
-![Swagger](docs/images/swagger.png)
-
+![Swagger](docs/images/Swagger.png.png)
 ---
 
 # 🚀 Instalación
