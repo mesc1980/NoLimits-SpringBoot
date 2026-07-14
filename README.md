@@ -121,7 +121,7 @@ A continuación se muestran algunas de las principales pantallas del proyecto **
 
 Vista inicial de la plataforma donde los usuarios pueden explorar las diferentes sagas y productos disponibles.
 
-![Página principal](documentos/imágenes/Paginaprincipal.png.png)
+![Página principal](docs/images/Paginaprincipal.png.png)
 
 ---
 
@@ -129,7 +129,7 @@ Vista inicial de la plataforma donde los usuarios pueden explorar las diferentes
 
 Pantalla de autenticación que permite acceder a las funcionalidades personalizadas de la plataforma.
 
-![Inicio de sesión](documentos/imágenes/Iniciodesesion.png.png)
+![Inicio de sesión](docs/images/Iniciodesesion.png.png)
 
 ---
 
@@ -137,7 +137,7 @@ Pantalla de autenticación que permite acceder a las funcionalidades personaliza
 
 Vista del catálogo de productos con sus diferentes opciones de exploración.
 
-![Gestión de productos](documentos/imágenes/Gestión%20de%20productos.png.png)
+![Gestión de productos](docs/images/Gestión%20de%20productos.png.png)
 
 ---
 
@@ -145,7 +145,7 @@ Vista del catálogo de productos con sus diferentes opciones de exploración.
 
 Sección donde el usuario puede administrar su información personal y configurar su cuenta.
 
-![Perfil](documentos/imágenes/PerfildeUsuario.png.png)
+![Perfil](docs/images/PerfildeUsuario.png.png)
 
 ---
 
@@ -153,7 +153,7 @@ Sección donde el usuario puede administrar su información personal y configura
 
 Ejemplo de ejecución de un endpoint desde Swagger/OpenAPI mostrando la petición y la respuesta obtenida desde la API.
 
-![Swagger](documentos/imágenes/Swagger.png.png)
+![Swagger](docs/images/Swagger.png.png)
 
 
 
