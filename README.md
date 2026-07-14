@@ -115,6 +115,8 @@ La siguiente imagen muestra la arquitectura general del backend de **NoLimits**,
 
 ![Gestión de productos](docs/images/Gestiondeproductos.png.png)
 
+![Inicio de sesion].(docs/images/Iniciodesesion.png.png).
+
 ![Perfil](docs/images/PerfildeUsuario.png.png)
 
 ![Swagger](docs/images/Swagger.png.png)
