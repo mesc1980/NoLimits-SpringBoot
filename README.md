@@ -56,6 +56,8 @@ El desarrollo de NoLimits fue posible gracias al trabajo colaborativo, la comuni
 - James Videla: https://github.com/JamesAVT
 - Christian Troncoso: https://github.com/SimonKaiak
 
+> Este proyecto fue desarrollado de manera colaborativa durante el proceso de titulación. Este repositorio documenta principalmente mi participación en el backend, reconociendo el aporte realizado por todos los integrantes del equipo.
+
 ---
 
 ## 👩‍💻 Mi participación
