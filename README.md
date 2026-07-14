@@ -137,7 +137,7 @@ Pantalla de autenticación que permite acceder a las funcionalidades personaliza
 
 Vista del catálogo de productos con sus diferentes opciones de exploración.
 
-![Gestión de productos](docs/images/Gestión%20de%20productos.png.png)
+![Gestión de productos](docs/images/Gestiondeproductos.png.png)
 
 ---
 
