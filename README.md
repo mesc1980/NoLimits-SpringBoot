@@ -111,16 +111,51 @@ La siguiente imagen muestra la arquitectura general del backend de **NoLimits**,
 
 ![Arquitectura del Backend](docs/images/arquitectura-backend-nolimits.png)
 
-![Página principal](docs/images/Paginaprincipal.png.png)
+# 📸 Capturas del sistema
 
-![Gestión de productos](docs/images/Gestiondeproductos.png.png)
+A continuación se muestran algunas de las principales pantallas del proyecto **NoLimits**, incluyendo la interfaz de usuario y la documentación interactiva de la API.
 
-![Inicio de sesion].(docs/images/Iniciodesesion.png.png).
-
-![Perfil](docs/images/PerfildeUsuario.png.png)
-
-![Swagger](docs/images/Swagger.png.png)
 ---
+
+## 🏠 Página principal
+
+Vista inicial de la plataforma donde los usuarios pueden explorar las diferentes sagas y productos disponibles.
+
+![Página principal](documentos/imágenes/Paginaprincipal.png.png)
+
+---
+
+## 🔐 Inicio de sesión
+
+Pantalla de autenticación que permite acceder a las funcionalidades personalizadas de la plataforma.
+
+![Inicio de sesión](documentos/imágenes/Iniciodesesion.png.png)
+
+---
+
+## 📦 Gestión de productos
+
+Vista del catálogo de productos con sus diferentes opciones de exploración.
+
+![Gestión de productos](documentos/imágenes/Gestión%20de%20productos.png.png)
+
+---
+
+## 👤 Perfil de usuario
+
+Sección donde el usuario puede administrar su información personal y configurar su cuenta.
+
+![Perfil](documentos/imágenes/PerfildeUsuario.png.png)
+
+---
+
+## 📖 Documentación Swagger
+
+Ejemplo de ejecución de un endpoint desde Swagger/OpenAPI mostrando la petición y la respuesta obtenida desde la API.
+
+![Swagger](documentos/imágenes/Swagger.png.png)
+
+
 
 # 🚀 Instalación
 
