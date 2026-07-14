@@ -15,17 +15,19 @@ API REST desarrollada con **Spring Boot** para el proyecto colaborativo **NoLimi
 
 ## 📑 Contenido
 
-- [📖 Descripción](#-descripción)
-- [🤝 Proyecto colaborativo](#-proyecto-colaborativo)
-- [👥 Equipo de desarrollo](#-equipo-de-desarrollo)
-- [👩‍💻 Mi participación](#-mi-participación)
-- [🛠 Tecnologías utilizadas](#-tecnologías-utilizadas)
-- [✨ Funcionalidades principales](#-funcionalidades-principales)
-- [🏗 Arquitectura](#-arquitectura)
-- [🚀 Instalación](#-instalación)
-- [🧪 Pruebas](#-pruebas)
-- [🌱 Aprendizajes](#-aprendizajes)
-- [🙏 Agradecimientos](#-agradecimientos)
+- 📖 Descripción
+- 🤝 Proyecto colaborativo
+- 👥 Equipo de desarrollo
+- 👩‍💻 Mi participación
+- 🛠️ Tecnologías utilizadas
+- ✨ Funcionalidades principales
+- 🏗️ Arquitectura
+- 📸 Capturas del sistema
+- 🚀 Instalación
+- 💉 Calidad del software
+- 🌱 Aprendizajes
+- 🙏 Agradecimientos
+- 📄 Licencia
 
 Backend del proyecto **NoLimits**, desarrollado de forma colaborativa como parte del proyecto de titulación de la carrera **Analista Programador** en **Duoc UC**.
 
@@ -50,11 +52,9 @@ El desarrollo de NoLimits fue posible gracias al trabajo colaborativo, la comuni
 
 ## 👥 Equipo de desarrollo
 
-- Marta Sanhueza
-- James
-- Christian
-
-> **Nota:** Si mis compañeros están de acuerdo, en el futuro agregaré sus perfiles de GitHub para reconocer también su trabajo y facilitar el acceso a sus contribuciones.
+- Marta Sanhueza: https://github.com/mesc1980
+- James Videla: https://github.com/JamesAVT
+- Christian Troncoso: https://github.com/SimonKaiak
 
 ---
 
