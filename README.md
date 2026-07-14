@@ -1,4 +1,8 @@
-# 🚀 NoLimits Backend
+# 🚀 Backend NoLimits
+
+API REST desarrollada con **Spring Boot** para el proyecto colaborativo **NoLimits**, creado como parte del proceso de titulación de **Analista Programador en Duoc UC**.
+
+> Este repositorio documenta mi participación en el desarrollo del backend, reconociendo el trabajo colaborativo del equipo.
 
 ![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
@@ -11,22 +15,27 @@
 
 ## 📑 Contenido
 
-- 🚀 Descripción
-- 🤝 Proyecto colaborativo
-- 👥 Equipo de desarrollo
-- 👩‍💻 Mi participación
-- 🛠 Tecnologías utilizadas
-- ✨ Funcionalidades principales
-- 🏗 Arquitectura
-- 🚀 Instalación
-- 🧪 Pruebas
-- 🌱 Aprendizajes
-- 🙏 Agradecimientos
+- [📖 Descripción](#-descripción)
+- [🤝 Proyecto colaborativo](#-proyecto-colaborativo)
+- [👥 Equipo de desarrollo](#-equipo-de-desarrollo)
+- [👩‍💻 Mi participación](#-mi-participación)
+- [🛠 Tecnologías utilizadas](#-tecnologías-utilizadas)
+- [✨ Funcionalidades principales](#-funcionalidades-principales)
+- [🏗 Arquitectura](#-arquitectura)
+- [🚀 Instalación](#-instalación)
+- [🧪 Pruebas](#-pruebas)
+- [🌱 Aprendizajes](#-aprendizajes)
+- [🙏 Agradecimientos](#-agradecimientos)
 
 Backend del proyecto **NoLimits**, desarrollado de forma colaborativa como parte del proyecto de titulación de la carrera **Analista Programador** en **Duoc UC**.
 
-NoLimits es una plataforma web orientada a centralizar información relacionada con videojuegos, películas y series. El backend fue desarrollado utilizando **Spring Boot**, implementando una arquitectura en capas, autenticación segura mediante JWT y una API REST para la comunicación con el frontend.
+# 📖 Descripción
 
+NoLimits es una plataforma web desarrollada como proyecto de titulación de la carrera **Analista Programador** en **Duoc UC**.
+
+Su objetivo es centralizar información relacionada con videojuegos, películas y series mediante una arquitectura moderna basada en una API REST desarrollada con Spring Boot y un frontend construido con React.
+
+Este repositorio corresponde al backend del proyecto y documenta mi participación dentro del equipo de desarrollo.
 ---
 
 ## 🤝 Proyecto colaborativo
@@ -102,18 +111,29 @@ La siguiente imagen muestra la arquitectura general del backend de **NoLimits**,
 
 ![Arquitectura del Backend](docs/images/arquitectura-backend-nolimits.png)
 
+---
+
 # 🚀 Instalación
 
 ## Requisitos
 
+Antes de ejecutar el proyecto, asegúrate de contar con:
+
 - Java 17
-- Maven
+- Maven 3.9 o superior
 - PostgreSQL
+- Git
 
 ## Clonar el repositorio
 
 ```bash
 git clone https://github.com/mesc1980/NoLimits-SpringBoot.git
+```
+
+## Acceder al proyecto
+
+```bash
+cd NoLimits-SpringBoot
 ```
 
 ## Ejecutar
@@ -122,17 +142,49 @@ git clone https://github.com/mesc1980/NoLimits-SpringBoot.git
 mvn spring-boot:run
 ```
 
+Una vez iniciado el servidor, la API estará disponible en:
+
+```
+http://localhost:8080
+```
+
+La documentación Swagger podrá consultarse en:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
 # 🧪 Calidad del software
 
-Durante el desarrollo del proyecto se aplicaron distintas estrategias para asegurar la calidad del software.
+Durante el desarrollo del proyecto se aplicaron distintas estrategias para asegurar la calidad del software y mantener una arquitectura robusta.
 
-Entre ellas:
+Entre las principales actividades realizadas destacan:
 
-- Pruebas unitarias con JUnit 5.
-- Pruebas utilizando Mockito.
-- Medición de cobertura mediante JaCoCo.
+- Desarrollo de pruebas unitarias con JUnit 5.
+- Uso de Mockito para simular dependencias durante las pruebas.
+- Medición de cobertura de código utilizando JaCoCo.
 - Validación de endpoints REST.
-- Documentación automática mediante Swagger.
+- Documentación automática mediante Swagger/OpenAPI.
+- Trabajo colaborativo utilizando Git y GitHub.
+
+---
+
+# 🌱 Aprendizajes
+
+El desarrollo de NoLimits representó una oportunidad para fortalecer conocimientos técnicos y habilidades de trabajo colaborativo.
+
+Durante este proyecto pude desarrollar competencias en:
+
+- Desarrollo de aplicaciones backend con Spring Boot.
+- Diseño e implementación de APIs REST.
+- Gestión de bases de datos PostgreSQL.
+- Implementación de autenticación mediante JWT.
+- Uso de Git y GitHub en equipos de desarrollo.
+- Aplicación de pruebas de software y aseguramiento de calidad.
+- Documentación técnica y buenas prácticas de desarrollo.
+- Comunicación y colaboración dentro de un equipo de desarrollo.
 
 # 🙏 Agradecimientos
 
@@ -141,3 +193,11 @@ Este proyecto fue posible gracias al trabajo colaborativo desarrollado durante e
 Quiero agradecer especialmente a mis compañeros de equipo por su compromiso, disposición para colaborar y por todos los aprendizajes compartidos durante el desarrollo de NoLimits.
 
 La experiencia reafirmó la importancia del trabajo en equipo, la comunicación y el desarrollo colaborativo de software.
+
+---
+
+# 📄 Licencia
+
+Este repositorio tiene fines académicos y forma parte del proyecto de titulación desarrollado en Duoc UC.
+
+El código se publica como muestra de mi participación en el proyecto y con fines de portafolio profesional.
