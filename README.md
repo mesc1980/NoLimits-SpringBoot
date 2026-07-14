@@ -100,7 +100,7 @@ Entre ellas se encuentran:
 
 La siguiente imagen muestra la arquitectura general del backend de **NoLimits**, desarrollada con Spring Boot y organizada en una arquitectura en capas.
 
-![Arquitectura del Backend](arquitectura-backend-nolimits.png)
+![Arquitectura del Backend](docs/images/arquitectura-backend-nolimits.png)
 
 # 🚀 Instalación
 
