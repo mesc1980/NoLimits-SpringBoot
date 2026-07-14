@@ -1,5 +1,14 @@
 # 🚀 NoLimits Backend
 
+![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)
+![JUnit 5](https://img.shields.io/badge/JUnit_5-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+
 Backend del proyecto **NoLimits**, desarrollado de forma colaborativa como parte del proyecto de titulación de la carrera **Analista Programador** en **Duoc UC**.
 
 NoLimits es una plataforma web orientada a centralizar información relacionada con videojuegos, películas y series. El backend fue desarrollado utilizando **Spring Boot**, implementando una arquitectura en capas, autenticación segura mediante JWT y una API REST para la comunicación con el frontend.
@@ -70,3 +79,11 @@ Entre ellas se encuentran:
 - 📄 Documentación automática con Swagger.
 - 🧪 Pruebas unitarias e integración.
 - 🏗️ Arquitectura basada en capas para facilitar el mantenimiento y la escalabilidad.
+
+---
+
+# 🏗 Arquitectura
+
+La siguiente imagen muestra la arquitectura general del backend de **NoLimits**, desarrollada con Spring Boot y organizada en una arquitectura en capas.
+
+![Arquitectura del Backend](arquitectura-backend-nolimits.png)
